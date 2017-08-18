@@ -71,10 +71,8 @@ public class LinkedList {
 		}
 		else
 		{
-			for(int i = 0; i < position; i++)
-			{
-				temp = temp.getNext();
-			}
+			for(int i = 0; i < position; i++,temp = temp.getNext());
+			
 			node.setNext(temp.getNext());
 			temp.setNext(node);
 		}
@@ -181,6 +179,32 @@ public class LinkedList {
 		return node1;
 	}
 	
+	public LinkedListNode nthNodeFromEndRecursive(int p)
+	{
+		return nthNodeFromEndRecursive(this.head, new int[]{p});
+	}
+	
+	
+	
+	private LinkedListNode nthNodeFromEndRecursive(LinkedListNode node, int[] arr) {
+		if(node == null)
+		{
+			return null;
+		}
+		LinkedListNode temp = nthNodeFromEndRecursive(node.getNext(), arr);
+		if(temp == null)
+		{
+			arr[0]--;
+			if(arr[0] == 0) return temp;
+			else
+				return null;
+		}
+		else
+		{
+			return temp;
+		}
+	}
+
 	public void printLL()
 	{
 		LinkedListNode node= this.head;
@@ -398,10 +422,10 @@ public class LinkedList {
 			slow = slow.getNext();
 		}
 		if(fast.getNext().getNext() == head) fast = fast.getNext();
-		LinkedListNode first = fast.getNext();
-		LinkedListNode mid = slow.getNext();
-		fast.setNext(mid);
-		slow.setNext(first);
+		LinkedListNode first = fast.getNext();//head
+		LinkedListNode mid = slow.getNext();//mid
+		fast.setNext(mid);//2nd half
+		slow.setNext(first);//1st half
 		LinkedList ll = new LinkedList();
 		ll.setHead(mid);
 		return ll;
@@ -538,4 +562,62 @@ public class LinkedList {
 		
 		return node;
 	}
+	
+	public LinkedListNode getModuloNode(int k)
+	{
+		LinkedListNode node = this.head;
+		LinkedListNode moduloNode = null;
+		for(int i = 1; node != null;node = node.getNext(), i++)
+			if(i%k==0) moduloNode = node;
+		return moduloNode;
+	}
+	
+	public LinkedListNode rotateRight(int k)
+	{
+		LinkedListNode node1 = this.head;
+		LinkedListNode node2 = this.head;
+		
+		for(int i = 1; i <= k; i++) node2 = node2.getNext();
+		
+		while(node2.getNext() != null)
+		{
+			node2 = node2.getNext();
+			node1 = node1.getNext();
+		}
+		node2.setNext(this.head);
+		this.head = node1.getNext();
+		node1.setNext(null);
+		return this.head;
+	}
+	
+	public LinkedListNode reorderByK(int k)
+	{
+		LinkedListNode n1 = null;
+		LinkedListNode n2 = null;
+		LinkedListNode node = this.head;
+		while(node != null)
+		{
+			if(node.getData() < k)
+			{
+				if(n1 == null)
+				{
+					this.head = node;
+					n1 = node;
+				}
+				else
+					n1.setNext(node);
+			}
+			else
+			{
+				if(n2 == null)
+					n2 = node;
+				else
+					n2.setNext(node);
+			}
+			node = node.getNext();
+		}
+		return this.head;
+	}
+	
+	
 }

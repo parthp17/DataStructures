@@ -34,6 +34,22 @@ public class BinaryTree {
 		}
 		return;
 	}
+	
+	public void preOrderTraversalIterative(TreeNode root)
+	{
+		if(root != null)
+		{
+			Stack<TreeNode> stack = new Stack<TreeNode>();
+			stack.push(root);
+			while(!stack.isEmpty())
+			{
+				TreeNode node = stack.pop();
+				visitNode(node);
+				if(node.getRight() != null) stack.push(node.getRight());
+				if(node.getLeft() != null) stack.push(node.getLeft());
+			}
+		}
+	}
 
 	public void postOrderTraversal(TreeNode n) {
 		if (n != null) {
@@ -211,9 +227,7 @@ public class BinaryTree {
 	{
 		if(n == null) return;
 		inOrderReplace(n.getLeft(),list,index);
-		n.setValue(list.get(index[0]));
-		System.out.println(n.getValue());
-		index[0]++;
+		n.setValue(list.get(index[0]++));
 		inOrderReplace(n.getRight(),list,index);
 	}
 	
@@ -221,7 +235,7 @@ public class BinaryTree {
 	{
 		List<Integer> list = new ArrayList<Integer>();
 		rootToLeafSums(n, list, 0);
-		
+
 		for(Integer i : list)
 			System.out.println(i);
 		
@@ -377,8 +391,8 @@ public class BinaryTree {
 			return lowestCommonAncestor(root, n1, n2);
 		}
 		return null;
-		
 	}
+	
 	private static boolean covers(TreeNode root, TreeNode n)
 	{
 		if(root == null) return false;
@@ -567,6 +581,7 @@ public class BinaryTree {
 			}
 		}
 	}
+	
 	
 	public static void inOrderIterative(TreeNode n)
 	{

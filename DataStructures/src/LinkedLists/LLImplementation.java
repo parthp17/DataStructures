@@ -12,32 +12,6 @@ import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 public class LLImplementation {
-
-	public static void pyramid(int height) {
-
-		StringBuilder sLine = new StringBuilder();
-		    for(int i=0; i<height ; i++) {
-		    
-		    
-		        for(int j = 0; j < height -i ; j++)
-		        {
-		            sLine.append(" ");
-		        }
-		        
-		       
-		       int limit = 2*i+ 1;
-		          
-		          for(int k = 0 ; k < limit; k++)
-		          {
-		             sLine.append("x");
-		          } 
-		        System.out.println(sLine.toString());
-		        sLine.delete(0,sLine.length());
-		        String s;
-		        
-		    }
-
-		}
 	
 	public static void main(String[] args)
 	{

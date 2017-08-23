@@ -1,0 +1,90 @@
+Hashing
+
+If a class needs to be used as a key in HashMap/HashTable, you need to override equals and hashcode method.
+
+Hashcode decides which bucket the value key will fall into. Once the bucket is identified, equals method
+is used to compare the keys whether they match or not. When the match is made, the corresponding value 
+is returned.
+
+HashMap - not synchroized , not thread safe, faster execution, one null key, multiple null values,
+			Collections.synchronizedMap() to get a synchronized hashmap.
+			
+HashTable - sycnhronized, thread safe methods, slower executon, legacy class, no null support
+
+A class HashMap<K,V> where K should override equals otherwise because once you lose the reference to an 
+key in map there is no way you can generate another key to obtain value because the object class's equal 
+method uses == to compare two object which basically means once you have the bucket, in order to retrieve 
+the key/value you must have a key that is either the same or meaningfully(as meant in equals method) same.
+
+K also must override hashCode method in case if it does not provide its own definition to hashcode method,
+if it doesnot provide the definition, object class definition which is based on memory will be used for 
+producing hashCode, which will be different for different objects which are meaning fully same which 
+could lead to wrong buckets while put and get opertaions for meaningfully same object.
+
+HashMap<K,V> has an inner class HashElement.
+HashMap: 
+	1) Class HashElement: HashElement has 3 instance variables. 1) K key 2) V value 3) HashElement next;
+	2) ArrayList<HashElement> rows: each row in hashmap. 
+	3) tablsize tsize: size of table(no of rows)
+	4) int count: no. of elements stored in table
+	5) LOAD_FACTOR: capacity of each row
+	6) DEFAULT_SIZE: default tsize
+	
+	constructor: HashMap(int size) initializes the tsize to size/LOAD_FACTOR, HashMap() DEFAULT_SIZE/LOAD_FACTOR
+	initialize rows. and add null to it for tsize times. count = 0;
+	
+	
+	hash() - key.hashCode() % tsize;
+	
+	
+	contains(K k): Hash(k) to get the index in rows. iterate in that row and invoke equals on key k.
+	
+	
+	get()
+		if(contains(k))
+			temp = rows.get(hash(k))
+			while(!temp.k.equals(k))temp = temp.next;
+			return temp.v;
+	
+	
+	put(K k, V v)
+	temp = rows.get(hash(k));
+	while(temp != null) temp =  temp.next;
+	temp.next = new Element(k,v);
+	count++;
+	if(((double)count/LOAD_FACTOR) > 0.8)
+		temprows = rows
+		this.tsize *= 2;
+		initilaize rows for new tsize.
+		for each element in temprows
+			rehash - hash(k)
+			add it to new rows.
+		
+		
+		
+	remove(K k): 
+		if contains(k)
+			head, prev = rows.get(hash(k));
+			while(head.k != k)prev = head; head = head.next;
+			if(prev!=null)prev.next = head.next;
+			else rows.set(hash(k),head.next)
+			head.next = null;
+			count--;
+			return head;
+		else return null;
+	
+	
+	entrySet()
+	set<E>
+	forEach(HashElement e : rows)
+		while(e != null)
+			set.add(e)
+	return set;
+	
+	
+	keySet()
+	set<K>
+	forEach(HashElement e : rows)
+		while(e != null)
+			set.add(e.k)
+	return set;

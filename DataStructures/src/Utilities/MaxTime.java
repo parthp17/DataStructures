@@ -10,15 +10,11 @@ class MaxTime {
 		String s = ""+a+b+c1+d;
 		char[] carray = s.toCharArray();
 		java.util.Arrays.sort(carray);
-		if( carray.length  > 4 || !(Integer.parseInt(String.valueOf(carray))/100 < 24 && Integer.parseInt(String.valueOf(carray))%100 < 60))
+		if( carray.length  > 4 || Integer.parseInt(String.valueOf(carray)) > 2359)
 			return "NOT POSSIBLE";
-
-		
 		StringBuffer output = new StringBuffer(); 
-
 		if(s.indexOf('2') > -1)
 		{
-			
 			s = s.substring(0,s.indexOf('2')) + s.substring(s.indexOf('2') +1, s.length());
 			output.append('2');
 			System.out.println(s);
@@ -31,9 +27,7 @@ class MaxTime {
 				output.append(i);
 				break;
 			}
-
 			System.out.println(output.toString());
-
 		}
 		else
 		{
@@ -55,18 +49,16 @@ class MaxTime {
 		}
 
 		output.append(":");
-			for(int i = 5; i >= 0; i--)
-			{
-				if(s.indexOf(String.valueOf(i)) < 0) continue;
-				
-				s = s.substring(0,s.indexOf(String.valueOf(i))) + s.substring(s.indexOf(String.valueOf(i)) +1, s.length());
-				System.out.println(s);
-				output.append(i);
-				break;
-			}
+		for(int i = 5; i >= 0; i--)
+		{
+			if(s.indexOf(String.valueOf(i)) < 0) continue;
+			s = s.substring(0,s.indexOf(String.valueOf(i))) + s.substring(s.indexOf(String.valueOf(i)) +1, s.length());
+			System.out.println(s);
+			output.append(i);
+			break;
+		}
 
-			output.append(s);
+		output.append(s);
 		return output.toString();
-
 	}
 }

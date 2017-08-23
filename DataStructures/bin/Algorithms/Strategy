@@ -1,0 +1,22 @@
+Strategy
+
+	Median in two sorted Array by divide and conquer / Binary search
+	
+	m is small array length, n is greater
+	imax = a.length; imin =0;
+	while(imin <= imax)
+		i = imin + (imax -imin)/2
+		j = (m+n+1)/2 -1
+		aleft = i == 0?Integer.MIN_VALUE:a[i-1];
+		aright = i== m ? integermax : a[i];
+		bleft = j == 0?Integer.MIN_VALUE:a[j-1];
+		bright = j== n ? integermax : a[j];
+		
+		if(aleft > bright) imax = i-1;
+		else if (bleft > aright) imin = i+1;
+		else
+			if m+n is odd return Math.max(aleft, bleft)
+			else
+				return (max(aleft,bleft) + min(aright,bright))/2;
+	
+	

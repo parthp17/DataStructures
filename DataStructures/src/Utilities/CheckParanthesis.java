@@ -1,7 +1,7 @@
 package Utilities;
 import java.util.Stack;
 
-public class StackUtility {
+public class CheckParanthesis {
 
 	
 	

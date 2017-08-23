@@ -599,13 +599,4 @@ public static String findMaxTime(int a, int b, int c1, int d) {
 				System.out.println(i);
 		}
 	}
-	
-	public static int abc(int x)
-	{
-		try{
-			return x;
-		}finally{
-			x++;
-		}
-	}
 }

@@ -538,9 +538,36 @@ public class LinkedList {
 	
 	public LinkedListNode getSum(LinkedListNode n1, LinkedListNode n2)
 	{
-		return getSum(n1, n2, 0);
+		LinkedListNode head = new LinkedListNode(0);
+		int carry = 0;
+		LinkedListNode curr=head;
+		while(n1 != null && n2 != null)
+		{
+			curr.setNext(new LinkedListNode((n1.getData() + n2.getData() + carry)%10));
+			curr = curr.getNext();
+			carry = (n1.getData() + n2.getData() + carry)/10;
+			n1=n1.getNext();
+			n2=n2.getNext();
+		}
+		
+		while( n1 != null)
+		{
+			curr.setNext(new LinkedListNode((n1.getData() + carry)%10));
+			carry = (carry + n1.getData())/10;
+			curr = curr.getNext();
+			n1 = n1.getNext();
+		}
+		
+		while( n2 != null)
+		{
+			curr.setNext(new LinkedListNode((n2.getData() + carry)%10));
+			carry = (carry + n2.getData())/10;
+			curr = curr.getNext();
+			n2 = n2.getNext();
+		}
+		return head.getNext();
 	}
-	private LinkedListNode getSum(LinkedListNode n1, LinkedListNode n2, int carry)
+	/*private LinkedListNode getSum(LinkedListNode n1, LinkedListNode n2, int carry)
 	{
 		if(n1==null && n2==null && carry == 0) return null;
 		int result = carry;
@@ -561,7 +588,7 @@ public class LinkedList {
 		node.setNext(getSum(n11,n21,result/10));
 		
 		return node;
-	}
+	}*/
 	
 	public LinkedListNode getModuloNode(int k)
 	{

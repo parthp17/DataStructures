@@ -211,7 +211,6 @@ public class DynamicProgramming {
 	
 	public String getLCS(char[] arr1, char[]arr2)
 	{
-		//longest common subsequence
 		int[][] matrix = new int[arr2.length+1][arr1.length+1];
 		int max = 0;
 		StringBuilder s = new StringBuilder();
@@ -286,29 +285,26 @@ public class DynamicProgramming {
 	
 	public int largestNonRepeatingSubsting(String s)
 	{
-		HashSet<Character> set = new HashSet<Character>();
-		int[] len = new int[s.length()];
-		int max = 0;
-		int[] bitvector = new int[8];
-		len[0] = 1;
-		int val = s.charAt(0) - '\0';
-		bitvector[val/32] |= (1<<(val%32));
-		for(int i = 0 ; i < len.length; i++)
+		int max = 1;
+		int currLen = 1;
+		int[] visited = new int[256];
+		Arrays.fill(visited, -1);
+		visited[s.charAt(0)] = 0;
+		for(int  i = 1; i < s.length(); i++)
 		{
-			val = s.charAt(i) - '\0';
-			int a = val/32;
-			int b = val%32;
-			if(((bitvector[a] >> b) & 1) != 1)
+			int prev = visited[s.charAt(i)];
+			if(prev == -1 || i-currLen > prev)
 			{
-				bitvector[a] |= (1<<b);
-				len[i] = len[i-1] + 1;
+				currLen++;
 			}
 			else
 			{
-				len[i] = 1;
+				if(currLen > max) max = currLen;
+				currLen = i - prev;
 			}
-			max = max > len[i]?max : len[i];
+			visited[s.charAt(i)] = i;
 		}
+		if(currLen > max) max =currLen;
 		return max;
 	}
 	
@@ -1189,5 +1185,10 @@ public class DynamicProgramming {
 			}
 		}
 		return llap;
+	}
+	
+	public int longestPalindromicSubstring(String s)
+	{
+		return 0;
 	}
 }

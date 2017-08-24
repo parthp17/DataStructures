@@ -1,0 +1,5 @@
+palindrome number
+
+	get reversehalf of the number
+	number/=10
+	return reversehalf == number || number == reversehalf/10

@@ -1,0 +1,16 @@
+AtoI
+
+	remove all leading spaces
+	check first char and set the sign flag move the ptr.
+	 while ptr is less than length
+	 	if intmax/10 < val || intmax/10 == val && intmax%10 < s.charAt(i) - '0'
+	 		return flag == '+' ? intmax : intmin;
+
+		val = val*10 + (s.charAt(i) - '0')
+
+	if(flag == '-') val *= -1;
+
+	return val;
+
+
+

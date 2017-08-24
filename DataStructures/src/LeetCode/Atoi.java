@@ -78,7 +78,6 @@ public class Atoi {
 	         result = result * 10 + (str.charAt(i) - '0');
 	         i++;
 	     }
-	  
 	     if (flag == '-')
 	         result = -result;
 	  

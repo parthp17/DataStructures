@@ -35,8 +35,8 @@ public class StringImplementation {
 		//StringUtility.distinctPermutations("aabc");
 		//StringUtility.generatePermutations("aab");
 		//StringUtility.printPrimeNumbers(10);
-		int a  = StringUtility.abc(10);
+		/*int a  = StringUtility.abc(10);
 		System.out.println(a);
-		
+		*/
 	}
 }

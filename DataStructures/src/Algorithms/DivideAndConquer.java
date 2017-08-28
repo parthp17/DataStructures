@@ -4,8 +4,6 @@ public class DivideAndConquer {
 
 	public int medianofTwoEqualSortedArray(int[] arr1, int[] arr2)
 	{
-		//return medianofTwoEqualSortedArray(arr1,arr2,0,arr2.length-1);
-		
 		int s1 = 0,s2 =0;
 		int e1 = arr1.length -1, e2 = arr2.length-1;
 		int m1, m2 ;
@@ -66,5 +64,4 @@ public class DivideAndConquer {
 		}
 		return -1;
 	}
-	
 }

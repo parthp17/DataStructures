@@ -1,6 +1,8 @@
 package LeetCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -11,39 +13,39 @@ public class TweetRecommendation {
 	public static void main(String[] args)
 	{
 		
-		String[][] followEdges = new String[][]{{"A","B"},{"A","C"},{"B","C"},{"B","D"},{"C","D"},{"C","A"}};
-		String[][] likeEdges = new String[][]{{"B","T1"},{"C","T2"},{"D","T3"},{"B","T2"},{"B","T3"},{"D","T2"},{"D","T1"}};
-		getRecommendations(followEdges, likeEdges, "A", 2).forEach(System.out::println);
 	}
 	
-	public static List<String> getRecommendations(String[][] followEdges,String[][] likeEdges, String targetUser, int threshold )
+	public static int[] getRecommendations(int[][] followEdges,int[][] likeEdges, int targetUser, int threshold )
 	{
-		TreeMap<String, Integer> map = new TreeMap<>();
-		List<String> connections = new ArrayList<>();
+		/*TreeMap<Integer, Integer> map = new TreeMap<>();
+		List<Integer> connections = new ArrayList<>();
+		*/
+		HashSet<Integer> set = Arrays.stream(followEdges).filter(t -> t[0] == (targetUser)).map(t -> t[1]).collect(Collectors.toCollection(HashSet::new));
+		//list.stream().forEach(t -> t[1]);
+		TreeMap<Integer, Long> map1= Arrays.stream(likeEdges).filter(t -> set.contains(t[0])).collect(Collectors.groupingBy(t -> t[1],TreeMap::new, Collectors.counting()));
 		
-		for(String[] sarr : followEdges)
+		/*for(int[] arr : followEdges)
 		{
-			if(sarr[0].equals(targetUser))
+			if(arr[0] == (targetUser))
 			{
-				connections.add(sarr[1]);
+				connections.add(arr[1]);
 			}
 		}
-		for(String[] sarr : likeEdges)
+		for(int[] arr : likeEdges)
 		{
-			if(connections.contains(sarr[0]))
+			if(connections.contains(arr[0]))
 			{
-				if(map.containsKey(sarr[1]))
+				if(map.containsKey(arr[1]))
 				{
-					map.put(sarr[1], map.get(sarr[1]) + 1);
+					map.put(arr[1], map.get(arr[1]) + 1);
 				}
 				else
 				{
-					map.put(sarr[1],1);
+					map.put(arr[1],1);
 				}
 			}
-		}
-		
-		List<String> list = map.entrySet().stream().filter(x -> x.getValue() >= threshold).map(y -> y.getKey()).collect(Collectors.toList());
+		}*/
+		int[] list = map1.entrySet().stream().filter(x -> x.getValue() >= threshold).mapToInt(y -> y.getKey()).sorted().toArray();
 		return list;
 	}
 }

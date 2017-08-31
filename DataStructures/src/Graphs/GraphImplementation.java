@@ -27,7 +27,7 @@ public class GraphImplementation {
 	     //g.doDFS(v0);
 	     //g.doBFS(v0);
 	    // System.out.println(g.isCyclic());
-	     g.doTopologicalSort();
+	     //g.doTopologicalSort();
 	}
 	
 	

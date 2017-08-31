@@ -378,17 +378,13 @@ public class LinkedList {
 	
 	public static LinkedListNode recursiveReverse(LinkedListNode node)
 	{
+		// null(0) -> head(1) -> second(2) -> third(3) ------(9)-> tenth(10)
 		if(node == null || node.getNext() == null) return node;
-		
-		LinkedListNode next = node.getNext();
-		
-		node.setNext(null);
-		
-		LinkedListNode rest = recursiveReverse(next);
-		
-		next.setNext(node);
-		
-		return rest;
+		LinkedListNode next = node.getNext(); //next =2
+		node.setNext(null); // head.next - > null0
+		LinkedListNode rest = recursiveReverse(next); //recure(2)
+		next.setNext(node); // 2.next = 1
+		return rest; // tenth(10)
 	}
 	
 	public void removeDuplicates()

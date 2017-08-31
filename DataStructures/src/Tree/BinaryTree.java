@@ -364,9 +364,7 @@ public class BinaryTree {
 	}
 	private static TreeNode lowestCommonAncestor(TreeNode root, TreeNode n1, TreeNode n2)
 	{
-		if(root == null) return null;
-		if(root == n1 || root == n2) 
-			return root;
+		if(root == null || root == n1 || root == n2) return root;
 		TreeNode x = lowestCommonAncestor(root.getLeft(), n1, n2);
 		if(x != null && x!=n1 && x != n2) 
 			return x;
@@ -375,13 +373,10 @@ public class BinaryTree {
 			return y;
 		
 		if(x != null && y != null)
-		{
 			return root;//null
-		}
+		else if (x != null && y != null) return root;
 		else
-		{
 			return x == null ? y:x;
-		}
 	}
 	
 	public static TreeNode leastCommonAncestor(TreeNode root, TreeNode n1, TreeNode n2){

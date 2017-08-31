@@ -149,7 +149,6 @@ public class DirectedUnweightGraph {
 		Queue<VertexInt> queue = new LinkedList<VertexInt>();
 		queue.add(v1);
 		VertexInt temp;
-		//List<VertexInt> ls= Arrays.asList(this.nodes);
 		int index;
 		while(!queue.isEmpty())
 		{
@@ -179,7 +178,6 @@ public class DirectedUnweightGraph {
 		Set<VertexInt> whiteSet = new HashSet<VertexInt>();
 		Set<VertexInt> greySet = new HashSet<VertexInt>();
 		Set<VertexInt> blackSet = new HashSet<VertexInt>();
-		
 		for(VertexInt v: nodes)
 			whiteSet.add(v);
 		while(whiteSet.size() > 0)
@@ -194,14 +192,12 @@ public class DirectedUnweightGraph {
 	private boolean dfs(VertexInt v, Set<VertexInt> white, Set<VertexInt> grey, Set<VertexInt> black)
 	{
 		moveVertex(v,white,grey);
-		
 		for(VertexInt v1 : edges[nodes.indexOf(v)])
 		{
 			if(black.contains(v1)) continue;
 			if(grey.contains(v1)) return true;
 			if(dfs(v1,white,grey,black))return true;
 		}
-		
 		moveVertex(v,grey,black);
 		return false;
 	}

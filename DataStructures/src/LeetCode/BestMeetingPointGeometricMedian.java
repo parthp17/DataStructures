@@ -37,7 +37,7 @@ public class BestMeetingPointGeometricMedian {
 	}
 	
 	public static void main(String[] args) {
-		
+
 		BestMeetingPointGeometricMedian gm= new BestMeetingPointGeometricMedian();
 		int[][] matrix = new int[][]{{1,0,0,0,1},{0,0,0,0,0},{0,0,1,0,0}};
 		System.out.println(gm.minDistance(matrix));

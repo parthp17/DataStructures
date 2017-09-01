@@ -17,16 +17,16 @@ public class DynamicProgramming {
 
 	public int maxSumSubArray(int[] arr)
 	{
-		int maxSoFar = Integer.MIN_VALUE;
-		int maxAt = 0;
+		int maxOverAll = Integer.MIN_VALUE;
+		int maxHere = 0;
 		
 		for(int i = 0; i < arr.length; i++)
 		{
-			maxAt += arr[i];
-			if(maxAt < 0) maxAt = 0;
-			if(maxAt > maxSoFar) maxSoFar = maxAt;
-		}		
-		return maxSoFar;
+			maxHere += arr[i];
+			if(maxHere < 0) maxHere = 0;
+			if(maxHere > maxOverAll) maxOverAll = maxHere;
+		}
+		return maxOverAll;
 	}
 	
 	public int nthUglynumber(int n)
@@ -844,7 +844,6 @@ public class DynamicProgramming {
 	
 	public int optimalBinarySearchTree(int[] nodes, int[] frequency)
 	{
-		
 		int[][] cost = new int[nodes.length][nodes.length];
 		int[][] roots = new int[nodes.length][nodes.length];
 		for(int i = 0; i < cost.length; i++)

@@ -82,15 +82,13 @@ public class StackUtility {
 			else
 			{
 				int top = stack.pop();
-				maxArea = Math.max(maxArea, arr[top]*(stack.isEmpty() ? i : i - top));
+				maxArea = Math.max(maxArea, arr[top]*(stack.isEmpty() ? i : i - stack.peek() - 1));
 			}
 		}
-
 		while(!stack.isEmpty())
 		{
 			int  top = stack.pop();
-			int val = stack.isEmpty() ? i : i - top;
-			maxArea = Math.max(maxArea, arr[top]*val);
+			maxArea = Math.max(maxArea, arr[top]*(stack.isEmpty() ? i : i - stack.peek() - 1));
 		}
 		return maxArea;
 	}
@@ -104,12 +102,7 @@ public class StackUtility {
 		s.push(4);
 		s.push(5);
 		s.push(2);
-		
-		//Arrays.stream(s.toArray()).forEach(System.out::println);
-		//st.sortStack(s);
-		//Arrays.stream(s.toArray()).forEach(System.out::println);
-		//Arrays.stream(st.increasingSpan(new int[]{1,2,3,4,5})).forEach(i -> System.out.println(i));
-		System.out.println(st.longestRecatangleArea(new int[]{3,2,5,6,1,4,4}));
+		System.out.println(st.longestRecatangleArea(new int[]{3,1,3,2,2}));
 	}
 	
 }

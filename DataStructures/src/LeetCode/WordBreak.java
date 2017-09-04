@@ -19,11 +19,10 @@ public class WordBreak {
 			/*
 			 *  i =3 at a,l = 1,2,3 left = 2,1,0 - sub = m, am ,iam
 			 */
-			for(int l = 1 ; l <= maxLen && l <= i ;l++)
+			for(int l = 1 ; l <= maxLen && l <= i && !dp[i];l++)
 			{
 				int left = i-l;
 				dp[i] = dp[left] && set.contains(s.substring(left, i));
-				if(dp[i])break;
 			}
 		}
         return dp[dp.length-1];

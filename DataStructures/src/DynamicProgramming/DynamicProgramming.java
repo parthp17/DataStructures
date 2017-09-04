@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.StringJoiner;
 
 import Tree.TreeNode;
@@ -14,19 +15,19 @@ import Utilities.StringUtility;
 
 
 public class DynamicProgramming {
-
-	public int maxSumSubArray(int[] arr)
+	public int maxSumSubArray(int[] nums)
 	{
 		int maxOverAll = Integer.MIN_VALUE;
-		int maxHere = 0;
-		
-		for(int i = 0; i < arr.length; i++)
-		{
-			maxHere += arr[i];
-			if(maxHere < 0) maxHere = 0;
-			if(maxHere > maxOverAll) maxOverAll = maxHere;
-		}
-		return maxOverAll;
+        int maxHere = 0;
+        for(int i = 0 ; i < nums.length ; i++)
+        {
+        	if(maxHere < 0)
+        		maxHere = nums[i];
+        	else
+        		maxHere += nums[i];
+        	if(maxOverAll < maxHere) maxOverAll = maxHere;			
+        }
+        return maxOverAll;
 	}
 	
 	public int nthUglynumber(int n)
@@ -232,6 +233,7 @@ public class DynamicProgramming {
 					matrix[i][j] = Math.max(matrix[i][j-1], matrix[i-1][j]);
 			}
 		}
+		
 		int i = matrix.length, j = matrix[0].length; 
 		System.out.println(max);
 		return s.toString();
@@ -280,9 +282,11 @@ public class DynamicProgramming {
 				dist[i][j] = path[i][j] + Math.min(Math.min(dist[i-1][j-1], dist[i-1][j]), dist[i][j-1]);
 			}
 		}
+		
+		
 		return dist[dist.length-1][dist[0].length-1];
 	}
-	
+
 	public int largestNonRepeatingSubsting(String s)
 	{
 		int max = 1;
@@ -333,16 +337,26 @@ public class DynamicProgramming {
 		Arrays.fill(table, 0); // O(n)
 		table[0] = 1;
 		
-		for(int i = 0; i< m; i++)
-		{
-			for(int j = arr[i]; j <= total ; j++ )
-			{
+		for(int i=0; i<m; i++)
+			for(int j=arr[i]; j <= total;j++)
 				table[j] += table[j - arr[i]];
-			}
-		}
 		return table[total];
 	}
 	
+	public int minCoins(int[] arr, int n)
+	{
+		int[] val = new int[n+1];
+		Arrays.sort(arr);
+		if(n < arr[0]) return -1;
+		Arrays.fill(val, Integer.MAX_VALUE);
+		val[0] = 0;
+		for(int i = 0; i < arr.length ; i++)
+			for(int j = arr[i] ; j < val.length ; j++)
+				if(val[j - arr[i]] != Integer.MAX_VALUE)
+					val[j] = Math.min(val[j], 1 + val[j - arr[i]]);
+		return val[val.length-1] == Integer.MAX_VALUE ? -1: val[val.length-1];
+	}
+
 	public int matrixMultOperations(int[] matSize)
 	{
 		int[][] operations = new int[matSize.length][matSize.length];
@@ -364,23 +378,17 @@ public class DynamicProgramming {
 		}
 		return operations[0][operations[0].length-1];
 	}
-	
-	
-	public int getBinomialCoefficent(int n, int r)
-	{
+
+	public int getBinomialCoefficent(int n, int r) {
 		int[] arr = new int[r+1];
 		arr[0] = 1;
 		for(int i = 1; i <= n; i++)
-		{
 			for(int j = Math.min(i, r); j > 0; j--)
-				arr[j] = arr[j] + arr[j-1];
-		}
+				arr[j] += arr[j-1];
 		return arr[r];
 	}
-	
 
 	public int getBinomialCoefficent(int n, int r, int[][] arr) {
-		//if(arr[r] != -1) return arr[r];
 		if(arr[n][r] == 0)
 		{
 			if( r == 0 || r == n)
@@ -391,22 +399,19 @@ public class DynamicProgramming {
 			else arr[n][r] = getBinomialCoefficent(n-1,r-1,arr) + getBinomialCoefficent(n-1, r,arr);
 		}
 		return arr[n][r];
-		
 	}
-	
+
 	public int knapSack01(int[] val,int[] weight, int maxWeight)
 	{
-		int[][] matrix = new int[val.length+1][maxWeight+1];
-		for(int i = 1 ; i < matrix.length ; i++)
+		int[][] matrix = new int[val.length][maxWeight+1];
+		for(int i = 0 ; i < matrix.length ; i++)
 		{
-			for(int j = 0 ; j < matrix[0].length; j++)
+			for(int j = 1 ; j < matrix[0].length; j++)
 			{
-				if(weight[i-1] > j)
-					matrix[i][j] = matrix[i-1][j];
+				if(weight[i] > j)
+					matrix[i][j] = i == 0? 0 : matrix[i-1][j];
 				else
-				{
-					matrix[i][j] = Math.max(val[i-1] + matrix[i-1][j-weight[i-1]], matrix[i-1][j]);
-				}
+					matrix[i][j] = i == 0 ? val[i] : Math.max(val[i] + matrix[i-1][j-weight[i-1]], matrix[i-1][j]);
 			}
 		}
 		int i=matrix.length-1, j=matrix[0].length-1;
@@ -420,9 +425,8 @@ public class DynamicProgramming {
 			i = i-1;
 		}while(i!=0 || j != 0 );
 		return matrix[matrix.length-1][matrix[0].length-1];
-				
 	}
-	
+
 	public int eggDrop(int floors, int eggs)
 	{
 		int[][] map = new int[eggs+1][floors+1];
@@ -449,7 +453,6 @@ public class DynamicProgramming {
 				}
 			}
 		}
-		
 		return map[map.length-1][map[0].length-1];
 	}
 	
@@ -565,13 +568,26 @@ public class DynamicProgramming {
 	
 	public int palindromicPartition(String s)
 	{
+		/*char[] ch = s.toCharArray();
+        int n = s.length();
+        int[] cuts = new int[n+1];
+        for(int i=0;i<=n;i++){
+            cuts[i] = i-1;
+        }
+        
+        for(int i=0;i<=n;i++){
+            for(int j=0;i+j<n && i-j>=0 && ch[i+j]==ch[i-j];j++)cuts[i+j+1] = Math.min(cuts[i+j+1], cuts[i-j]+1); //odd len
+            for(int j=1;i+j<n && i-j+1>=0 && ch[i+j]==ch[i-j+1];j++)cuts[i+j+1] = Math.min(cuts[i+j+1], cuts[i-j+1]+1); //even len
+        }
+        return cuts[n];*/
+		
 		int[][] matrix = new int[s.length()][s.length()];
 		
-		for(int l = 1 ; l < matrix.length;l++)
+		for(int l = 2 ; l <= matrix.length;l++)
 		{
-			for(int i = 0; i < matrix.length - l; i++)
+			for(int i = 0; i <= matrix.length - l; i++)
 			{
-				int j = i+l;
+				int j = i+l -1;
 				if(StringUtility.isPalindrome(s.substring(i, j+1)))
 					matrix[i][j] = 0;
 				else
@@ -636,12 +652,9 @@ public class DynamicProgramming {
 		{
 			for(int j = 1; j < matrix[0].length; j++)
 			{
-				if(arr[i-1] > j)
-					matrix[i][j] = matrix[i-1][j];
-				else
-				{
-					matrix[i][j] = matrix[i-1][j] || matrix[i-1][j-arr[i-1]];
-				}
+				matrix[i][j] = matrix[i-1][j];
+				if(arr[i-1] <= j)
+					matrix[i][j] = matrix[i][j] || matrix[i-1][j-arr[i-1]];
 			}
 		}
 		return matrix[matrix.length -1][matrix[0].length-1];
@@ -863,27 +876,19 @@ public class DynamicProgramming {
 					if(root==i)
 					{
 						if(min > cost[root+1][j])
-						{
 							min = cost[root + 1][j];
-							roots[i][j] = root;
-						}
 					}
 					else if(root == j)
 					{
 						if(min > cost[i][root-1])
-						{
 							min = cost[i][root-1];
-							roots[i][j] = root;
-						}
 					}
 					else
 					{
 						if(cost[root+1][j] + cost[i][root-1] < min)
-						{
 							min = cost[root+1][j] + cost[i][root-1];
-							roots[i][j] = root;
-						}
 					}
+					roots[i][j] = root;
 				}
 				cost[i][j] += min;
 			}
@@ -930,8 +935,6 @@ public class DynamicProgramming {
 		int[] arr = new int[matrix.length];
 		int maxSum = Integer.MIN_VALUE;
 		int right= 0,left=0,up=0,down=0;
-		
-		
 		for(int l = 0; l < matrix[0].length; l++)
 		{
 			Arrays.fill(arr, 0);
@@ -989,20 +992,13 @@ public class DynamicProgramming {
 	public int findDiceWays(int m, int n, int sum)
 	{
 		int[][] table = new int[n+1][sum+1];
-		
 		for(int i = 1; i <= m && i <= sum; i++)
-		table[1][i] = 1;
-		
+			table[1][i] = 1;
 		for(int i = 2; i <= n; i++)
-		{
 			for(int j = 1; j <= sum; j++)
-			{
 				for(int k = 1; k <= m && k < j; k++)
-				{
-					table[i][j] += table[i-1][j-k]; 
-				}
-			}
-		}
+					table[i][j] += table[i-1][j-k];
+
 		return table[n][sum];
 	}
 	
@@ -1186,8 +1182,8 @@ public class DynamicProgramming {
 		return llap;
 	}
 	
-	public int longestPalindromicSubstring(String s)
+	/*public int longestPalindromicSubstring(String s)
 	{
 		return 0;
-	}
+	}*/
 }

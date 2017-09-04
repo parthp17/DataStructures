@@ -62,16 +62,15 @@ public class Utility {
             {-4, -1, 1, 7, -6}
            }));*/
 		
-		//System.out.println(dp.minInsertionPalindrome("geeks"));
+		System.out.println(dp.minInsertionPalindrome("geeks"));
 		//System.out.println(dp.findDiceWays(6, 3, 8));
 		//System.out.println(dp.optimalGame(new int[]{20, 30, 2, 2, 2, 10}));
 		/*String[] s ={"mobile","samsung","sam","sung","man","mango",
 	            "icecream","and","go","i","like","ice","cream"};
 		List<String> ls = new ArrayList<String>(Arrays.asList(s));
 		System.out.println(dp.wordSplit("ilikessamsung", ls));*/
-		
 		//System.out.println(dp.stringInterleaving("axy", "aab", "aaxaby"));
 		//System.out.println(dp.lenghtLongestArithmeticProgression(new int[]{1, 7, 10, 15, 27, 29}));
-		
+		//System.out.println(dp.minCoins(new int[]{3,5}, 4));
 	}
 }

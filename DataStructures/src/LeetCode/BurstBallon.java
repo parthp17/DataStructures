@@ -20,7 +20,7 @@ public class BurstBallon {
 					int before = k == i ? 0 : matrix[i][k-1].val;
 					int after = k == j ? 0 : matrix[k+1][j].val;
 					matrix[i][j] = matrix[i][j] == null ? new Tuple2() : matrix[i][j];
-					int lBoundary = i ==0?1 : arr[i-1];
+					int lBoundary = i == 0? 1 : arr[i-1];
 					int rBoundary = j == (arr.length-1) ?1 : arr[j+1];
 					int val = after + before +  (lBoundary * rBoundary * arr[k]);
 					matrix[i][j].val = Math.max(val,  matrix[i][j].val);
@@ -28,8 +28,6 @@ public class BurstBallon {
 				}
 			}
 		}
-		
-		
 		return matrix[0][arr.length-1].val;
 	}
 	

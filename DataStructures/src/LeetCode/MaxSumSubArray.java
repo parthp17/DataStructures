@@ -2,9 +2,7 @@ package LeetCode;
 
 public class MaxSumSubArray {
 	public int maxSubArray(int[] nums) {
-		int start = 0;
-        int end = 0 ;
-        int maxOverAll = Integer.MIN_VALUE;
+		int maxOverAll = Integer.MIN_VALUE;
         int maxHere = 0;
         for(int i = 0 ; i < nums.length ; i++)
         {

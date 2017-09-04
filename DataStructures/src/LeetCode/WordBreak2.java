@@ -19,18 +19,18 @@ public class WordBreak2 {
             return hm.get(s);
         }
         List<String> res = new ArrayList<>();
-        if (s.length() == 0) {
-            res.add("");
-            return res;
-        }
-        for (String word : wordDict) {
-            if (s.startsWith(word)) {
-                List<String> remainLists = dfs(s.substring(word.length()), wordDict, hm);
-                for (String r : remainLists) {
-                    res.add(word + (r.length() == 0 ? "" : " ") + r);
-                }
-            }
-        }
+		if (s.length() == 0) {
+			res.add("");
+			return res;
+		}
+		for (String word : wordDict) {
+			if (s.startsWith(word)) {
+				List<String> remainLists = dfs(s.substring(word.length()), wordDict, hm);
+				for (String r : remainLists) {
+					res.add(word + (r.length() == 0 ? "" : " ") + r);
+				}
+			}
+		}
         hm.put(s, res);
         return res;
     }

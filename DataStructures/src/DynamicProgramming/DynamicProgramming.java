@@ -210,7 +210,7 @@ public class DynamicProgramming {
 		return maxLength;
 	}
 	
-	public String getLCS(char[] arr1, char[]arr2)
+	public String getLCS(char[] arr1, char[] arr2)
 	{
 		int[][] matrix = new int[arr2.length+1][arr1.length+1];
 		int max = 0;
@@ -279,11 +279,9 @@ public class DynamicProgramming {
 		{
 			for(int j = 1 ; j < path[0].length; j++)
 			{
-				dist[i][j] = path[i][j] + Math.min(Math.min(dist[i-1][j-1], dist[i-1][j]), dist[i][j-1]);
+				dist[i][j] = path[i][j] + Math.min(dist[i-1][j], dist[i][j-1]);
 			}
 		}
-		
-		
 		return dist[dist.length-1][dist[0].length-1];
 	}
 
@@ -998,7 +996,6 @@ public class DynamicProgramming {
 			for(int j = 1; j <= sum; j++)
 				for(int k = 1; k <= m && k < j; k++)
 					table[i][j] += table[i-1][j-k];
-
 		return table[n][sum];
 	}
 	
@@ -1069,35 +1066,28 @@ public class DynamicProgramming {
 		return mat[0][mat[0].length-1];
 	}
 	
-	public boolean stringInterleaving(String s1, String s2, String s)
+	public boolean stringInterleaving(String s1, String s2, String s3)
 	{
-		if(s.length() != s1.length() + s2.length()) return false;
-		boolean[][] map = new boolean[s1.length()+1][s2.length()+1];
-		
-		map[0][0] = true;
-		for(int i = 1; i < map[0].length; i++)
-			if(s.charAt(i-1) == s2.charAt(i-1)) map[0][i] =  map[0][i-1];
-			else
-				map[0][i] = false;
-		
-		for(int i =1; i < map.length; i++)
-			if(s.charAt(i-1) == s1.charAt(i-1)) map[i][0] =  map[i-1][0];
-			else
-				map[i][0] = false;
-		
- 		for(int i = 1; i < map.length; i ++)
-		{
-			for(int j = i, k = 1; k < map[0].length ; j++,k++)
-			{
-				if(s1.charAt(i-1) == s.charAt(j))
-					map[i][k] = map[i-1][k];
-				else if(s2.charAt(k-1) == s.charAt(j))
-					map[i][k] = map[i][k-1];
-				else
-					map[i][k]= false;
-			}
-		}
-		return map[map.length-1][map[0].length-1];
+		char[] c1 = s1.toCharArray();
+        char[] c2 = s2.toCharArray();
+        char[] c3 = s3.toCharArray();
+        
+        boolean[][] matrix = new boolean[c2.length+1][c1.length+1];
+        matrix[0][0] = true;
+        for(int i = 1 ; i < matrix[0].length ; i ++)
+            matrix[0][i] = c1[i-1] == c3[i-1] && matrix[0][i-1];
+        
+        for(int i = 1 ; i < matrix.length ; i ++)
+            matrix[i][0] = c2[i-1] == c3[i-1] && matrix[i-1][0];
+        
+        for(int i = 1 ; i < matrix.length ; i ++)
+        {
+            for(int j = 1 ; j < matrix[0].length ; j ++)
+            {
+                matrix[i][j] = (c3[i+j-1] == c1[j-1] && matrix[i][j-1]) || (c3[i+j-1] == c2[i-1] && matrix[i-1][j]);                
+            }
+        }
+        return matrix[matrix.length-1][matrix[0].length-1];
 	}
 	
 	public int carAssembly(int[][] assembly, int[][] transfer, int[] entry, int[] exit)
@@ -1111,7 +1101,7 @@ public class DynamicProgramming {
 			table[0][i]= Math.min( table[0][i-1] + assembly[0][i], table[1][i-1] +transfer[1][i] + assembly[1][i]);
 			table[1][i] = Math.min(assembly[1][i] + table[1][i-1], table[0][i-1] +transfer[0][i] + assembly[0][i]);
 		}
-		return Math.min(table[0][table[0].length- 1], table[1][table[1].length- 1]);
+		return Math.min(table[0][table[0].length- 1] + exit[0], table[1][table[1].length- 1] + exit[1]);
 	}
 	
 	class Job implements Comparable<Job>

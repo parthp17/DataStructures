@@ -11,13 +11,13 @@ public class Utility {
 		DynamicProgramming dp = new DynamicProgramming();
 		//System.out.println(dp.maxSumSubArray(new int[]{-2,-3,5,-1,2,8,-7,3,-7,6}));
 		//System.out.println(dp.nthUglynumber(18));
-		/*System.out.println(dp.maxSizeSubMatrixwith1(new int[][]{{0, 1, 1, 0, 1}, 
+/*		System.out.println(dp.maxSizeSubMatrixwith1(new int[][]{{0, 1, 1, 0, 1}, 
             {1, 1, 0, 1, 0}, 
             {0, 1, 1, 1, 0},
             {1, 1, 1, 1, 0},
             {1, 1, 1, 1, 1},
-            {0, 0, 0, 0, 0}}));*/
-		//System.out.println(dp.fibonacci(5));
+            {0, 0, 0, 0, 0}}));
+*/		//System.out.println(dp.fibonacci(5));
 		/*System.out.println(dp.doesMazePathExsists(new int[][]{
 			{1, 1, 1, 1, 1}, 
             {1, 0, 1, 0, 1},
@@ -31,9 +31,9 @@ public class Utility {
 		//System.out.println(dp.getLCS("AGGTAB".toCharArray(), "GXTXAYB".toCharArray()));
 		
 		//System.out.println(dp.editDistance("sunday", "saturday"));
-		/*System.out.println(dp.minCostPath(new int[][]{ {1, 2, 3},
+		System.out.println(dp.minCostPath(new int[][]{ {1, 2, 3},
             {4, 8, 2},
-            {1, 5, 3} }));*/
+            {1, 5, 3} }));
 		//System.out.println(dp.largestNonRepeatingSubsting("ABDEFGABEF"));
 		//System.out.println(dp.minJumps(new int[] {1, 3, 6, 3, 2, 3, 6, 8, 9, 5}));
 		//System.out.println(dp.countCoinWays(new int[]{2,3,5,6},4,10));
@@ -62,7 +62,7 @@ public class Utility {
             {-4, -1, 1, 7, -6}
            }));*/
 		
-		System.out.println(dp.minInsertionPalindrome("geeks"));
+		//System.out.println(dp.minInsertionPalindrome("geeks"));
 		//System.out.println(dp.findDiceWays(6, 3, 8));
 		//System.out.println(dp.optimalGame(new int[]{20, 30, 2, 2, 2, 10}));
 		/*String[] s ={"mobile","samsung","sam","sung","man","mango",

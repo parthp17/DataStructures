@@ -1,4 +1,0 @@
-A/
-A B / S
-AB/S
-(AB)C((D E)F) /SRS

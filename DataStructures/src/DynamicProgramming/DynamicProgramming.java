@@ -312,6 +312,18 @@ public class DynamicProgramming {
 	
 	public int minJumps(int[] arr)
 	{
+		
+		 /*if (nums == null || nums.length == 0) return 0;
+	        int jumps = 0, currEnd = 0, currFarthest = 0;
+	        for (int i = 0; i < nums.length-1; i++) {
+	            currFarthest = Math.max(currFarthest, i+nums[i]);
+	            if (i == currEnd) {
+	                jumps++;
+	                currEnd = currFarthest;
+	            }
+	        }
+	        return jumps;*/
+		
 		int[] jumps  = new int[arr.length];
 		jumps[0] = 0;
 		for(int i = 1; i < arr.length; i++)

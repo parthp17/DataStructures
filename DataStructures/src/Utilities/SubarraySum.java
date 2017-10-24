@@ -11,6 +11,4 @@ public class SubarraySum {
 
         return answer;
     }
-
-	
 }

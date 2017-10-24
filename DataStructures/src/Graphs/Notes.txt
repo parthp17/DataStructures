@@ -1,0 +1,322 @@
+Graphs can be represented as
+	Adjacency List(sparse graph) / Adjacency Matrix(dense graph)
+
+class vertex<T>{ T val; boolean visited}
+class Edges<I>{T start; T end; int weight;}
+
+Types of graph
+	UnDirectedUnweighted Graph
+		Edges are bi-directional and no weight - class UnDirectedUnweighted {ArrayList<Vertex> vertices; LinkedList<Vertex>[] edges; add(Vertex v1, Vertex v2);}
+	UnDirectedWeighted Graph
+		Edges are bi-directional and weighted - class UnDirectedWeighted {ArrayList<Vertex> vertices; LinkedList<Vertex>[] edges; add(Vertex v1, Vertex v2, int weight);}
+	DirectedUnweighted Graph
+		Edges are uni-directonal and no weights - class DirectedUnweighted { ArrayList<Vertex> vertices; LinkedList<Vertex>[] edges; add(Vertex v1, Vertex v2);}
+	DirectedWeighted Graph
+		Edges are uni-ddirectional and weighted - class DirectedWeighted {ArrayList<Vertex> vertices; LinkedList<Vertex>[] edges; add(Vertex v1, Vertex v2, int weight);}
+
+
+
+Breadth First Search
+
+	given a vertex, first traverse through all the immediate neighbours, and then to thiers neighbours
+	doBFS(Vertex v)
+		
+		Queue<Vertex> q = new Queue();
+		q.add(v)
+		while(!ls.isEmpty())
+			Vertex vertex = q.peek()
+			for(Veretx v1 : edges[vertex])
+				if(v1 != null && v1.visited == false)
+					v1.visit();
+					q.add(v1);
+			
+Depth First Search
+
+	given a vertex, for each of its connections go through the entire chain of connections before moving on to next neighbour
+
+	doDFS(Vertex v)
+		if(v != null && v.visited == false)
+			v.visit(v)
+			for(Vertex vertex : edges[v])
+				doDFS(vertex)
+
+Topological Sort - Directed Acyclic Graph
+	
+	for each vertices in graph, if it is not already marked visited, mark it as visited, do Topological sort(DFS) over its unvisited neighbours, add vertex to stack.
+
+	doTopologicalSort()
+		Stack<Vertex> stack = new Stack<>();
+		for(Vertex v : vertices)
+			if(!v.visited)
+				doTopologicalSort(v, stack);
+		stack.forEach(System.out::println)
+
+	doTopologicalSort(Vertex v, Stack<vertex> stack)
+		if(v != null && !v.visited)
+			v.visited = true;
+			for(Vertex v1 : edges[v])
+				doTopologicalSort(v1, stack)
+			stack.push(v);
+
+Detect Cycle in Directed Graph
+
+3 sets
+	white, grey, black
+	add all vertices to white set.
+
+	foreach element in white set [!while(white.isEmpty()) v = white.iterator.next();]
+		move it to grey set - move(v,white,grey)
+		explore its neighbours, 
+			if found in black, continue
+			if in grey, cycle found
+			else recurse with that neighbour
+		move it to black set - move(v,grey,black)
+
+Detect Cycle in UnDirected Graph
+
+2 ways) 
+	Depth First Search
+		take a vertex and do DFS marking all the visiting node as visited.
+		while doing DFS pass along the immediate parent, and DFS except for immediate parent.
+		if you reach a vertex marked visited, cycle is found.
+	DisJoint Sets by Rank and Compression
+
+		Make set for each vertex
+		for each edge, check the vertices, if they are in same set, cycle is found, else union the sets.
+
+DisJointSets - using rank and path compression - to identify cycles in graph & Kruskal's Algorithm O(EkV) = O(4E) = O(E)
+
+class DisJointSet<T>{
+	
+	class Node{
+		int rank;
+		Node parent;
+		T val;
+		Node(int rank, T t){this.rank = rank; this.val= t; parent = this;}
+	}
+
+	private HashMap<T, Node> map = new HashMap<>();
+	
+	makeSet(T t){Node n = new Node(0,t); map.put(t,n)}
+
+	public findSet(T t){ return findSet(map.get(t));}
+
+	private findSet(Node n){
+		Node p = n.parent; 
+		if(n == p)return n;
+		return n.parent = findSet(p.parent);
+	}
+
+	Union(T t1, T t2){
+		Node n1 = map.get(t1);
+		Node n2 = map.get(t2);
+		n1 = findSet(n1);
+		n2 = findSet(n2);
+		if(n1 == n2) return;
+		else if(n1.rank == n2.rank){
+			n1.rank++;
+			n2.parent = n1;
+		}
+		else if(n1.rank > n2.rank){
+			n2.parent = n1;
+		}
+		else{
+			n1.parent = n2;
+		}
+	}
+}
+
+
+
+Minimum Spanning Tree using Kruskal's algorithm space - 0(E + V) , time O(ELogE + E)
+	tree with N vertices and N-1 edges is called a spanning tree, minimum spanning tree is tree with minimum weights in addition to N vertices and N-1 edges
+
+	find a sub graph or a sub tree that contains all the vertices and minimum number of edges with minimum weight.
+	Make a dis joint set for all vertices.
+	create a list to store resultant edges
+	sort the edges increaingly
+	for each edge in sorted list.
+		get endpoints
+		find their set representatives
+		if they are in same set ignore edge
+		else add the edge to resultant and union the sets.
+
+Binary Mean heap - returns minimum in array/list at any time in O(Log(n))
+	uses a list of integers
+	two operations - extractMin() & Add();
+
+	extractMin() - O(log(n))
+		min = take the first element from the array to be returned
+		remove the last element fromt the array and add it at index 0;
+		HeapifyDown()
+			k = 0 ;
+			max = 2k +1;
+			while(max <= list.size())
+				max = list.get(max)- list.get(max+1) > 0 ? max + 1: max;
+				if(list.get(max) < list.get(k))
+					int temp = list.get(max);
+					List.set(max, list.get(k))
+					list.set(k,temp);
+					k = max;
+					max = 2k+1;
+				else
+					break;
+		return min;
+
+	add(val) - O(log(n))
+		add to the end of  list;
+		HeapifyUp()
+		k = list.size() - 1; // index of last element added
+		p = (k-1)/2;
+		while(p >= 0)
+			if(list.get(p).compareTo(list.get(k)))
+				int temp = list.get(p);
+				list.set(p,list.get(k));
+				list.set(k,temp);
+				k = p;
+				p = (k-1)/2;
+			else
+				break;
+
+
+Prim's Binary Minimum Heap supports contains() - O(1) & decrease() - O(log(n))
+
+	private HashMap<Vertex, Index>
+	private List<Node> ls
+	class Node{
+		int weight;
+		Vertex v;
+	}
+
+	extractMin()
+		logic remains the same as BMH;
+		additonal swaping
+		get the first Node to return its vertex;
+		place the last Node  at first place and HeapifyDown.
+		max = max > max +1 ? max+1 ; max;
+		if(list.get(k).wieght > list.get(max).weight)
+			Node n1 = list.get(k);Node n2 = list.get(max);
+			list.set(k,n2);map.put(n2.vertex,k);
+			list.set(max,n1);map.put(n1.vertex,max);
+			k = max;
+			max = 2k+1;
+
+	add(vertex, weight)
+		make node from vertex andd wieght
+		logic is same
+			additonal bookin keeping for map
+
+	decrease(vertex ,weight)
+		k = map.get(vertex);
+		list.gett(k).weight  = weight;
+		p = (k -1)/2;
+		while(p >= 0)
+		{
+			if(list.get(k).weight < list.get(p).weight )
+				Node n1 = list.get(k); Node n2 = list.get(p);
+				list.set(k,n2);map.put(n2,k);
+				list.set(p,n1);map.put(n1,p);
+				k = p;
+				p = (k-1)/2;
+			else
+				break;
+		}
+
+
+	conatins(Vertex)
+		return map.conatinsKey(vertex)
+
+	getWeight(Vertex)
+		return list.get(map.get(Vertex)).weight
+
+Minimum Spanning Tree using Prim's algorithm O(ELogV) O(E + V)
+
+	Map<V,E> resultMap
+	List<> result
+	add all nodes with INT.MAX weight to PRIMBMH
+	get first node form graph and decrease its weight to zero.
+	while(PRIMSBMH is not empty)
+		 vertex = extract min();
+		 E = resultmap.get(vertex) != null ; result.add(E);
+
+		 for(Edge e : edges.get(vertices.indexOf(vertex)))
+		 	v1 = remote(e,vertex);
+		 	if(PRIMSBMH.contains(v1) && e.weight < PRIMSBMH.getweight(v1))
+		 		decrease(v1,e.wieght)
+		 		resultMap.put(v1,E)
+
+
+Dijkstra's Algorithm
+
+	find the shortest distance of all the vertices from Single source in an undirected graph O(ELogV) O(E + V)
+	add all vertices with infinity to BMH
+	decrease source to zero
+	while(MBh is not empty)
+		extract min and add it to distance map
+		explore all edges - check if distance for that vertex can be decreased
+			decrease the distance
+			update in distance map
+
+	HashMap Distance 
+	HashMap Parent 
+	PrimsBMH
+Bellman Ford
+
+	find the shortest distance of all the vertices from a single source in directed graph can have negative edges also detects negative cycles in graph
+	for V vertices, loop v-1 times over E edges and 1 more time to detect negative edge. O(EV) O(V)
+
+		HashMap Distance
+		HashMap parent
+		Initialize distance map for all the vertices to infinite distance and source vertex to zero
+		for V - 1 times iterate through the Edges and check
+			if(distance.get(v) > distance.get(u) + uv.weight)
+				distance.get(v) = distance.get(u) + uv.weight
+				parent.put(v,u)
+
+		for last time iterate through all the edges and check if distance is still decreasing
+		if it is still decreasing negative weight cycle is found
+
+	Applying same strategy for all vertices as source we can find min distance of all vertex from given all vertex in O(EV^2), in worst case equals to O(V^4) which is bad
+
+Floyd Warshal DynamicProgramming works wiht -ve weight edges and can detect -ve cycles in graph
+	applications - clean's algorithm, transitive closure or widest path in the graph
+
+	find the shortest distance of all vertices from all vertices in directed graph or Undirected graph in O(V^3)
+	two matrices of distance and parent
+	copy graph to distance
+	set parent as per edges
+
+	three for loops
+	k =0 to k < vertrices.length
+		i = 0 to i < vertices.lenght
+			j = 0 to j < vertices.length
+				if(distance of i,j > distance[i][k] + distance[k][j])
+					distance[i][j] = distance[i][k] + distance[k][j]
+					parent[i][j] = parent[k][j]
+
+Strongly connected Components using Kosaraju's Algorithm - 2 Pass algorithm - do DFS
+	in facebook - to find strongly connected people with each other and create a group for them with common interest.
+	Strongly connected component in a graph is sub graph in which every vertex can be reached from every other vertex.
+
+	In first pass do DFS, and order the vertices in finish time in decreasing order.
+	set to mark them visited and a stack to order vertices by finish time.
+
+	for each vertex 
+		mark it as visited
+		doDFS over it
+		add it to stack
+
+	reverse the graph
+	unmark visited all vertices
+
+	pop vertex from stack
+	if not visited
+		create a new set for strongly connected component
+		doDFS over reversed graph
+			add all unvisited vertex to set and mark visisted
+		add set to list of strongly connected component.
+
+Maximum Flow through directed graph using Ford Fulkerson Edmonod Karp's Algorithm
+
+
+

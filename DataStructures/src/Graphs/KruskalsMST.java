@@ -11,9 +11,8 @@ public class KruskalsMST {
 	{
 		
 		List<Edge> allEdges = uwg.getAllEdges();
-		EdgeComparator ec = new EdgeComparator();
 		
-		Collections.sort(allEdges, ec);
+		Collections.sort(allEdges, (e1,e2) -> {return e1.weight - e2.weight;});
 		DisJointSet ds = new DisJointSet();
 		
 		for(VertexInt v : uwg.vertices)

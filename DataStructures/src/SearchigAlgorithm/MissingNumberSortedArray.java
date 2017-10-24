@@ -13,11 +13,11 @@ public class MissingNumberSortedArray {
 
 		int mid = (l + h) >> 1;
 
-		if(arr[mid] == mid) 
+		if(arr[mid] == mid)
 			return findMissingNumber(arr,mid+1,h,n);
 		else
 		{
-			if(mid == 0 || arr[mid -1] == mid -1 ) 
+			if(mid == 0 || arr[mid -1] == mid-1) 
 				return mid;
 			else
 				return findMissingNumber(arr,l,mid-1,n);

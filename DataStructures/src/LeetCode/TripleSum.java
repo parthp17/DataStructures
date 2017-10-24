@@ -19,9 +19,9 @@ public class TripleSum {
 			{
                 if(j != i+1 && nums[j] == nums[j-1])
                 {
-                    j++;
-                    continue;
-                }    
+                	j++;
+                	continue;
+                }
 				int total = l + nums[j] + nums[k]; 
 				if(total == 0)
 				{

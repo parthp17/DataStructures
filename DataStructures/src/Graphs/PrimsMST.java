@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 public class PrimsMST {
-	
+//O(Log(E+V)) O(ELogV)	
 //undirectedweightedgraph
 //map
 //PrimsBMH
-	
+
 	HashMap<VertexInt,Edge> resultMap;
 	PrimsBMH minHeap;
 	

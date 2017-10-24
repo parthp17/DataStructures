@@ -16,7 +16,17 @@ public class BinaryMinHeap<T extends Comparable<T>> {
 		heapifyUp();
 	}
 	
-	public void heapifyUp() {
+	public T extractMin()
+	{
+		if(list.size() < 1) return null;
+		if(list.size() == 1) return list.remove(0);
+		T item = list.get(0);
+		list.set(0, list.remove(list.size()-1));
+		heapifyDown();
+		return item;
+	}
+	
+	private void heapifyUp() {
 		int k = list.size() - 1;
 		int p = (k-1)/2;
 		while(p >= 0)
@@ -36,17 +46,7 @@ public class BinaryMinHeap<T extends Comparable<T>> {
 		}
 	}
 
-	public T extractMin()
-	{
-		if(list.size() < 1) return null;
-		if(list.size() == 1) return list.remove(0);
-		T item = list.get(0);
-		list.set(0, list.remove(list.size()-1));
-		heapifyDown();
-		return item;
-	}
-
-	public void heapifyDown() {
+	private void heapifyDown() {
 		
 		int k = 0;
 		int max  = 2*k + 1;
@@ -57,8 +57,7 @@ public class BinaryMinHeap<T extends Comparable<T>> {
 			{
 				max++;
 			}
-			
-			if(list.get(k).compareTo(list.get(max)) < 0)
+			if(list.get(max).compareTo(list.get(k)) < 0)
 			{
 				T item = list.get(k);
 				list.set(k, list.get(max));
@@ -71,6 +70,5 @@ public class BinaryMinHeap<T extends Comparable<T>> {
 				break;
 			}
 		}
-		
 	}
 }

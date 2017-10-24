@@ -59,7 +59,7 @@ public class StackUtility {
 	{
 		int[] span = new int[arr.length];
 		Stack<Integer> stack = new Stack<>();
-		int  p;
+		int p;
 		for(int i =0; i < arr.length; i++)
 		{
 			while(!stack.isEmpty() && arr[i] > arr[stack.peek()]) stack.pop();
@@ -102,7 +102,6 @@ public class StackUtility {
 		s.push(4);
 		s.push(5);
 		s.push(2);
-		System.out.println(st.longestRecatangleArea(new int[]{3,1,3,2,2}));
+		System.out.println(st.longestRecatangleArea(new int[]{2,3,4,1}));
 	}
-	
 }

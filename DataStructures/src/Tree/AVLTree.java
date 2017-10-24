@@ -87,5 +87,4 @@ public class AVLTree extends BinarySearchTree{
 		}
 		return root;
 	}
-	
 }

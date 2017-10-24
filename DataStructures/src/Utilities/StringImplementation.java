@@ -28,7 +28,7 @@ public class StringImplementation {
 		//System.out.println(StringUtility.matchPattern("parth", "*"));
 		//StringUtility.intervleavedStrings("ab", "cd", "", 2,2);
 		
-		//StringUtility.lexographicalRank("string");
+		StringUtility.lexographicalRank("string");
 		//HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
 		//map.put
 		//System.out.println(StringUtility.isAnagram("Paarth","Paarth"));

@@ -1,6 +1,5 @@
 package Tree;
-import java.sql.ClientInfoStatus;
-import java.util.Arrays;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -143,9 +142,6 @@ public class BinarySearchTree extends BinaryTree{
 		if(n.getRight() != null) return findMin(n.getRight());
 		else
 		{
-			if(root == null) return null;
-			else
-			{
 				TreeNode next = null;
 				while(root != null)
 				{
@@ -162,7 +158,7 @@ public class BinarySearchTree extends BinaryTree{
 						break;
 				}
 				return next;
-			}
+			
 		}
 	}
 	

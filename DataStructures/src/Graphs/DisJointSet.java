@@ -56,10 +56,10 @@ public class DisJointSet {
 		node.parent = findSet(node.parent);
 		return node.parent;
 	}
-	 public int findSet(int data)
-	 {
-		 return findSet(map.get(data)).data;
-	 }
+	public int findSet(int data)
+	{
+		return findSet(map.get(data)).data;
+	}
 	 
 	 
 	 public static void main(String[] args)
@@ -87,5 +87,5 @@ public class DisJointSet {
 	        System.out.println(ds.findSet(5));
 	        System.out.println(ds.findSet(6));
 	        System.out.println(ds.findSet(7)); 
-	 }
+	}
 }

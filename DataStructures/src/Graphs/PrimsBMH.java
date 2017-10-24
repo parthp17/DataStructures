@@ -21,6 +21,7 @@ public class PrimsBMH {
 	public class Node{
 		int weight;
 		VertexInt key;
+		Node(int weight, VertexInt key){this.weight = weight ; this.key = key;}
 	}
 	
 	private ArrayList<Node> list;
@@ -44,17 +45,13 @@ public class PrimsBMH {
 	
 	public void add(VertexInt key, int weight)
 	{
-		Node n = new Node();
-		n.weight = weight;
-		n.key = key;
+		Node n = new Node(weight,key);
 		list.add(n);
 		int k = list.size() - 1;
 		map.put(key, k);
 		int l = (k-1)/2;
-		
 		while(l >= 0)
 		{
-			
 			Node n1 = list.get(k);
 			Node n2 = list.get(l);
 			

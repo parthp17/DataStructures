@@ -10,6 +10,24 @@ public class MaxInRotatedSortedArray {
 		
 		while(i <= j)
 		{
+			int mid = i + j >> 1;
+			if(i == j)
+			{
+				max = arr[mid];
+				break;
+			}
+			else if( arr[i] < arr[mid])
+			{
+				i = mid;
+				max = arr[mid];
+			}
+			else
+			{
+				j = mid -1;
+			}
+		}
+		/*while(i <= j)
+		{
 			int mid = i+j >> 1;
 			if(mid == i)
 			{
@@ -30,7 +48,7 @@ public class MaxInRotatedSortedArray {
 			}
 			else if(arr[mid] > arr[mid -1])
 				i =mid;
-		}
+		}*/
 		return max;
 	}
 }

@@ -36,15 +36,6 @@ class Edge{
 	}
 }
 
-class EdgeComparator implements Comparator<Edge>
-{
-
-	@Override
-	public int compare(Edge e1, Edge e2) {
-			return e1.weight-e2.weight;
-	}
-}
-
 /*class Edge<V>{
 	Vertex<V> start, end;
 	int weight;
@@ -184,7 +175,7 @@ public class DirectedUnweightGraph {
 		{
 			VertexInt current = whiteSet.iterator().next();
 			if(dfs(current, whiteSet, greySet, blackSet))
-			return true;
+				return true;
 		}
 		return false;
 	}
@@ -195,7 +186,7 @@ public class DirectedUnweightGraph {
 		for(VertexInt v1 : edges[nodes.indexOf(v)])
 		{
 			if(black.contains(v1)) continue;
-			if(grey.contains(v1)) return true;
+			else if(grey.contains(v1)) return true;
 			if(dfs(v1,white,grey,black))return true;
 		}
 		moveVertex(v,grey,black);
@@ -215,21 +206,16 @@ public class DirectedUnweightGraph {
 		 * */
 		Set<VertexInt> set = new HashSet<VertexInt>();
 		Stack<VertexInt> stack = new Stack<VertexInt>();
-		
 		for(VertexInt v : nodes)
-		{
-			if(!set.contains(v)) doTopologicalSort(v, set, stack);
-		}
+			if(!set.contains(v)) 
+				doTopologicalSort(v, set, stack);
 		while(!stack.isEmpty())System.out.println(stack.pop().value);
 	}
 	private void doTopologicalSort(VertexInt v, Set<VertexInt> set, Stack<VertexInt> stack) {
-		
 		set.add(v);
 		for(VertexInt v1 : edges[nodes.indexOf(v)])
-		{
 			if(!set.contains(v1))
 				doTopologicalSort(v1, set, stack);
-		}
 		stack.push(v);
 	}
 }

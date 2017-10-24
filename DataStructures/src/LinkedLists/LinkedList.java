@@ -483,6 +483,12 @@ public class LinkedList {
 		LinkedListNode prev = null;
 		LinkedListNode next = null;
 		int count = k;
+		for(int i = 0 ; i < k ;i++)
+			if(current == null) return node;
+			else
+				current = current.getNext();
+		
+		current  = node;
 		while(current != null && count > 0)
 		{
 			next = current.getNext();
@@ -515,8 +521,6 @@ public class LinkedList {
 		}
 		if(n != null)
 		n.setNext(current);
-		
-		
 		for(;count<k;count++)
 		{
 			if(current!=null)

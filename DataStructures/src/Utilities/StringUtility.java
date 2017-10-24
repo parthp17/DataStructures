@@ -434,7 +434,7 @@ public static String findMaxTime(int a, int b, int c1, int d) {
 		if(m != 0)
 		{
 			output += s1.charAt(0);
-			System.out.println(output);
+			//System.out.println(output);
 			intervleavedStrings(s1.substring(1), s2, output, m-1, n);
 			//m -=1;
 		}
@@ -442,7 +442,7 @@ public static String findMaxTime(int a, int b, int c1, int d) {
 		if(n != 0)
 		{
 			output += s2.charAt(0);
-			System.out.println(output);
+			//System.out.println(output);
 			intervleavedStrings(s1, s2.substring(1), output, m , n-1);
 			//n -=1;
 		}
@@ -576,6 +576,7 @@ public static String findMaxTime(int a, int b, int c1, int d) {
 			}
 		}
 	}
+	
 	public static void swap(char[] s, int a , int b)
 	{
 		char temp = s[a];

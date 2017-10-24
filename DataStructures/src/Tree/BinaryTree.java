@@ -53,11 +53,9 @@ public class BinaryTree {
 
 	public void postOrderTraversal(TreeNode n) {
 		if (n != null) {
-
 			postOrderTraversal(n.getLeft());
 			postOrderTraversal(n.getRight());
 			visitNode(n);
-
 		}
 		return;
 
@@ -65,7 +63,6 @@ public class BinaryTree {
 
 	public void inOrderTraversal(TreeNode n) {
 		if (n != null) {
-
 			inOrderTraversal(n.getLeft());
 			visitNode(n);
 			inOrderTraversal(n.getRight());
@@ -504,9 +501,7 @@ public class BinaryTree {
 	
 	public static TreeNode convertToChildSumTree(TreeNode n)
 	{
-		if(n == null) return null;
-		
-		if(n.getLeft() == null && n.getRight() == null) return n;
+		if(n == null || (n.getLeft() == null && n.getRight() == null)) return n;
 		
 		TreeNode left = convertToChildSumTree(n.getLeft());
 		TreeNode right = convertToChildSumTree(n.getRight());
@@ -539,15 +534,15 @@ public class BinaryTree {
 	{
 		if(n == null) return 0;
 		
-		int leftHeight = getDiameter(n.getLeft(),maxHeight) + 1;
-		int rightHeight = getDiameter(n.getRight(),maxHeight) + 1;
+		int leftHeight = getDiameter(n.getLeft(),maxHeight);
+		int rightHeight = getDiameter(n.getRight(),maxHeight);
 		
-		if(maxHeight[0] < (leftHeight + rightHeight - 1))
+		if(maxHeight[0] < (leftHeight + rightHeight + 1))
 		{
-			maxHeight[0] = leftHeight+rightHeight-1;
+			maxHeight[0] = leftHeight+rightHeight+1;
 		}
 		
-		return Math.max(leftHeight, rightHeight);
+		return Math.max(leftHeight, rightHeight) + 1;
 	}
 	
 	public static void inOrderWithStack(TreeNode n)
@@ -878,5 +873,15 @@ public class BinaryTree {
 			if(arr[y] != arr1[y]) return false;
 		}
 		return true;
+	}
+	
+	public static boolean subTree(TreeNode s, TreeNode t)
+	{
+		if(s == t) return true;
+		if(s == null) return false; 
+		if(sameTree(s, t))
+			return true;
+		return subTree(s.getLeft(), t) || subTree(s.getRight(),t);
+		
 	}
 }

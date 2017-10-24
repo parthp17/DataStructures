@@ -2,95 +2,89 @@ package LeetCode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
-class Vertex{
-	char value;
-	boolean visited = false;
-	public Vertex(char c) {
-		this.value = c;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return obj instanceof Vertex && this.value == ((Vertex)obj).value;
+class AlienDictionary {
+	class CircularException extends Exception{
+		
+		
 	}
 	
-	@Override
-	public int hashCode() {
-		return value;
-	}
-}
-class Solution {
-	
-	Set<Vertex> vertices = new HashSet<>();
-	ArrayList<LinkedList<Vertex>> edges = new ArrayList<>();
+	Map<Character,Set<Character>> vertices = new HashMap<>();
 	
     public String alienOrder(String[] words) {
     	
-    	for(int s = 0 ; s < words.length ; s++)
+    	for(String s : words)
+    		for(char c : s.toCharArray())
+    			if(!vertices.containsKey(c))
+    				vertices.put(c, new HashSet<>());
+    	
+    	for(int s = 0 ; s < words.length-1; s++)
     	{
-    		for(int c = 0; c < words[s].length(); c++)
+    		String s1 = words[s];
+    		String s2 = words[s+1];
+    		int len = s1.length() >= s2.length() ? s2.length() : s1.length();
+    		for(int i = 0; i < len ; i++)
     		{
-    			Vertex v; 
-    			if(vertices.contains( v = new Vertex(words[s].charAt(c))))
-    				vertices.add(v);
+    			if(s1.charAt(i) != s2.charAt(i))
+    			{
+    				vertices.get(s1.charAt(i)).add(s2.charAt(i));
+    				break;
+    			}
     		}
-    		
-    		if(s > 0)
-    		{
-    			
-    			
-    		}
-    		
-    		
     	}
-    	return null;
-        /*boolean[][] graph = new boolean[26][26];
-        int[] visited = new int[26];
-        Arrays.fill(visited, -1);
-        for (int i = 0; i <
-         words.length; i++) {
-            for (char c : words[i].toCharArray()) {
-                visited[c - 'a'] = 0;
-            }
-            if (i > 0) {
-                String w1 = words[i - 1], w2 = words[i];
-                int len = Math.min(w1.length(), w2.length());
-                for (int j = 0; j < len; j++) {
-                    char c1 = w1.charAt(j), c2 = w2.charAt(j);
-                    if (c1 != c2) {
-                        graph[c1 - 'a'][c2 - 'a'] = true;
-                        break;
-                    }
-                }
-            }
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 26; i++) {
-            if (visited[i] == 0 && !dfs(graph, visited, sb, i)) {
-                return "";
-            }
-        }
-        return sb.reverse().toString();
+    	Stack<Character> stack  = new Stack<>();
+    	Set<Character> visited = new HashSet<>();
+    	Set<Character> alphabets = vertices.keySet();
+    	Iterator itr = alphabets.iterator(); 
+    	while(itr.hasNext())
+    	{
+    		char c = (char) itr.next();
+    		if(!visited.contains(c))
+				try {
+					doTopologicalSort(c, visited, stack, vertices);
+				} catch (CircularException e) {
+					
+				}
+    	}
+    	
+    	StringBuilder sb = new StringBuilder();
+    	while(!stack.isEmpty())
+    		sb.append(stack.pop());
+    	return sb.toString();
     }
-    
-    private boolean dfs(boolean[][] graph, int[] visited, StringBuilder sb, int i) {
-        visited[i] = 1;
-        for (int j = 0; j < 26; j++) {
-            if (graph[i][j]) {
-                if (visited[j] == 1) {
-                    return false;
-                }
-                if (visited[j] == 0 && !dfs(graph, visited, sb, j)) {
-                    return false;
-                }
-            }
-        }
-        visited[i] = 2;
-        sb.append((char) (i + 'a'));
-        return true;*/
-    }
+
+	private void doTopologicalSort(char c, Set<Character> visited, Stack<Character> stack, Map<Character,Set<Character>> map) throws CircularException {
+		
+			visited.add(c);
+			Set<Character> edges = map.get(c);
+			for(char c1 : edges)
+			{
+				if(!visited.contains(c1))
+					doTopologicalSort(c1, visited, stack, map);
+				else if(visited.contains(c1) && !stack.contains(c1))
+				{
+					stack.clear();
+					visited.addAll(map.keySet());
+					throw new CircularException();
+				}
+
+			}
+			stack.push(c);
+	}
+	
+	public static void main(String[] args) {
+		
+		AlienDictionary ad = new AlienDictionary();
+		String[] words = {"ri","xz","qxf","jhsguaw","dztqrbwbm","dhdqfb","jdv","fcgfsilnb","ooby"};
+		System.out.println(ad.alienOrder(words));
+	}
 }

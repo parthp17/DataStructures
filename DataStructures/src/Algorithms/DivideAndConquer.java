@@ -59,7 +59,7 @@ public class DivideAndConquer {
 					return Math.max(a2Left, a1Left);
 				}
 				else
-					return Math.max(a2Left, a1Left) + Math.min(a1Right, a2Right) >> 1;
+					return (Math.max(a2Left, a1Left) + Math.min(a1Right, a2Right)) >> 1;
 			}
 		}
 		return -1;

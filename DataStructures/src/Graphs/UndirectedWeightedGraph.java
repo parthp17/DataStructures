@@ -14,7 +14,7 @@ public class UndirectedWeightedGraph {
 		this.vertices = new ArrayList<VertexInt>();
 		this.edges = new java.util.LinkedList[num];
 		for(int i =0; i < num ; i++)
-		this.edges[i] = new java.util.LinkedList<Edge>();
+			this.edges[i] = new java.util.LinkedList<Edge>();
 	}
 	
 	public void addEdge(VertexInt v1, VertexInt v2, int weight)

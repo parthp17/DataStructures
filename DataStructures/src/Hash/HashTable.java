@@ -1,15 +1,16 @@
 package Hash;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class HashTable<K,V>
 {
+	private static final int LOADFACTOR = 20;
+	private static final int DEFAULT_SIZE = 100;
+	
 	class HashElement
 	{
 		K key;
-		V value;	
+		V value;
 		HashElement next;
 		public HashElement(K key, V value)
 		{
@@ -20,10 +21,8 @@ public class HashTable<K,V>
 	}
 	
 	public ArrayList<HashElement> row = null;
-	int tsize;
-	int count;
-	static final int LOADFACTOR = 20;
-	static final int DEFAULT_SIZE = 100;
+	int tsize; // no of rows
+	int count; // no of total elements
 	public HashTable()
 	{
 		this(DEFAULT_SIZE);
@@ -147,7 +146,4 @@ public class HashTable<K,V>
 			}
 		}
 	}
-	
-	
-	
 }

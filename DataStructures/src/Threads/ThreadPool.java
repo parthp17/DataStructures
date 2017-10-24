@@ -33,6 +33,7 @@ public class ThreadPool {
 	
 	private class WorkerThread extends Thread
 	{ 
+		@Override
 		public void run()
 		{
 			Runnable task;
@@ -50,7 +51,6 @@ public class ThreadPool {
 						}
 					task = queue.poll();
 				}
-				
 				try
 				{
 					System.out.println(Thread.currentThread().getId() + " " + Thread.currentThread().getName());

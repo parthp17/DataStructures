@@ -51,8 +51,17 @@ public class BestTimeBuySellStock {
 		return matrix[matrix.length-1][matrix[0].length-1];
 	}
 	
+	//unlimited transactions
+	public int maxProfit(int[] prices, boolean flag) {
+	    int total = 0;
+	    for (int i=1; i< prices.length; i++) {
+	        if (prices[i]>prices[i-1]) total += prices[i]-prices[i-1];
+	    }
+	    return total;
+	}
+	
 	public static void main(String[] args) {
-		System.out.println(new BestTimeBuySellStock().maxProfit(new int[]{2,5,7,1,4,3,1,3}, 3));
+		System.out.println(new BestTimeBuySellStock().maxProfit(new int[]{1, 7, 2, 3, 6, 7, 6, 7}, false));
 	}
 	
 }

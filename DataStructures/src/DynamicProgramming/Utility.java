@@ -28,12 +28,12 @@ public class Utility {
 		//System.out.println(dp.getfibonacci(4));
 		//System.out.println(dp.getLIS(new int[]{ 10, 22, 9, 33, 21, 50, 41, 60 }));
 		
-		//System.out.println(dp.getLCS("AGGTAB".toCharArray(), "GXTXAYB".toCharArray()));
+		System.out.println(dp.getLCS("AGGTAB".toCharArray(), "GXTXAYB".toCharArray()));
 		
 		//System.out.println(dp.editDistance("sunday", "saturday"));
-		System.out.println(dp.minCostPath(new int[][]{ {1, 2, 3},
+		/*System.out.println(dp.minCostPath(new int[][]{ {1, 2, 3},
             {4, 8, 2},
-            {1, 5, 3} }));
+            {1, 5, 3} }));*/
 		//System.out.println(dp.largestNonRepeatingSubsting("ABDEFGABEF"));
 		//System.out.println(dp.minJumps(new int[] {1, 3, 6, 3, 2, 3, 6, 8, 9, 5}));
 		//System.out.println(dp.countCoinWays(new int[]{2,3,5,6},4,10));

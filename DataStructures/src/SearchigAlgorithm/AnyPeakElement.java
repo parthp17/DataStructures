@@ -1,6 +1,6 @@
 package SearchigAlgorithm;
 
-public class PeakElement {
+public class AnyPeakElement {
 
 	public static int findPeak(int[] arr)
 	{

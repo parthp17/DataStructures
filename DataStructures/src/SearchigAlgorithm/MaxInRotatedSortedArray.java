@@ -13,17 +13,16 @@ public class MaxInRotatedSortedArray {
 			int mid = i + j >> 1;
 			if(i == j)
 			{
-				max = arr[mid];
+				max = mid;
 				break;
 			}
-			else if( arr[i] < arr[mid])
+			else if( arr[mid] < arr[j])
 			{
-				i = mid;
-				max = arr[mid];
+				j = mid;
 			}
 			else
 			{
-				j = mid -1;
+				i = mid + 1;
 			}
 		}
 		/*while(i <= j)

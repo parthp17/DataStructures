@@ -37,40 +37,44 @@ public class SearchInRotatedSortedArray {
 	{
 		int i = 0;
 		int j = nums.length-1;
+		int finalmid = -1;
 		int mid = -1;
 		while(i <= j)
 		{
 			mid = i + j >> 1;
 		
 			if(nums[mid] == target)
-				return mid;
-			else if (nums[mid] < nums[j])
 			{
-				if(target > nums[mid] )
+				finalmid = mid;
+				break;
+			}
+			else if (nums[i] <= nums[mid])
+			{
+				if (target >= nums[i] && target < nums[mid])
 				{
-					/// right
-					i = mid + 1;
+					
+					j = mid - 1;
 				}
 				else
 				{
 					//left
-					j = mid -1;
+					i = mid + 1;
 				}
 			}
 			else
 			{
-				if(target > nums[mid] )
+				if(target > nums[mid]  && target <= nums[j])
 				{
-					//left
-					j = mid -1;
+					
+					i = mid + 1;
 				}
 				else
 				{
-					// right
-					i = mid + 1;
+					
+					j = mid -1;
 				}
 			}
 		}
-		return mid;
+		return finalmid;
 	}
 }

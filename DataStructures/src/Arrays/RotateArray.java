@@ -37,6 +37,18 @@ public class RotateArray {
             end--;
         }
     }
+    
+    public void rotate1(int[] nums, int k) {
+        int n = nums.length;
+        k = k % n;
+        int[] left = new int[k];
+        int[] right = new int[n-k];
+        
+        System.arraycopy(nums, 0, right, 0, n-k);
+        System.arraycopy(nums,n-k, left, 0, k);
+        System.arraycopy(left, 0, nums, 0, k);
+        System.arraycopy(right, 0, nums, k, n-k);
+    }
 	
 	public static void main(String[] args) {
 		

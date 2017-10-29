@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class RoughWork {
 
 	public static void main(String[] args) {
-		System.out.println(func(args[0]));
+		System.out.println(reverseWords("ssdsdsd"));
 	}
 	
 	public static boolean func(String args)
@@ -22,4 +22,18 @@ public class RoughWork {
 		
 		return Pattern.compile("([\\p{N}\\p{P}\\p{Z}\\p{L}\\p{M}*]+){1,100}").matcher("Nice work!".toString()).matches();
 	}
+	
+		static public String reverseWords(String s) {
+        if(s == null || s.length() == 0 || s.length() == 1) return s;
+        s= "    ";
+        String[] arr = s.split("\\s");
+        if(arr.length == 0) return s;
+        StringBuilder sb = new StringBuilder();
+        for(int i = arr.length-1 ; i >= 0;i--)
+        {
+            System.out.println(arr[i]+ i);
+            sb.append(arr[i]+ " ");
+        }
+        return sb.deleteCharAt(sb.length()-1).toString();
+    }
 }

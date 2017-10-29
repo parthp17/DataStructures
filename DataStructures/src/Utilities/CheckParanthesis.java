@@ -16,9 +16,9 @@ public class CheckParanthesis {
 			for(char c : array)
 			{
 				if(c == '[' || c == '{' || c == '(') stack.push(c);
-				else if((c == ']' || c == '}' || c == ')') && !stack.isEmpty())
+				else if((c == ']' || c == '}' || c == ')'))
 				{
-					if((c==']' && stack.peek() == '[') || (c=='}' && stack.peek() == '{') || (c==')' && stack.peek() == '('))
+					if(!stack.isEmpty() && ((c==']' && stack.peek() == '[') || (c=='}' && stack.peek() == '{') || (c==')' && stack.peek() == '(')))
 					{
 						stack.pop();
 						answer[i-1] = "YES";

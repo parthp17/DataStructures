@@ -19,7 +19,6 @@ public class StringUtility {
 	public static boolean isPalindrome(String s)
 	{
 		if(s == null || s.length() == 0 || s.length() == 1) return true;
-		
 		return (s.charAt(0) == s.charAt(s.length() - 1) && isPalindrome(s.substring(1, s.length() - 1)));
 	}
 	
@@ -58,6 +57,8 @@ public class StringUtility {
 		
 		int length = remainder.length();
 		if(length == 0) set.add(output);
+		StringBuilder ab = new StringBuilder();
+		
 		for(int i = 0; i < length; i++)
 		{
 			String before= remainder.substring(0, i);

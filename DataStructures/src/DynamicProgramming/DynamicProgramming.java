@@ -15,6 +15,8 @@ import Utilities.StringUtility;
 
 
 public class DynamicProgramming {
+	
+	//Kadane's algorithm
 	public int maxSumSubArray(int[] nums)
 	{
 		int maxOverAll = Integer.MIN_VALUE;
@@ -421,7 +423,7 @@ public class DynamicProgramming {
 				if(weight[i] > j)
 					matrix[i][j] = i == 0? 0 : matrix[i-1][j];
 				else
-					matrix[i][j] = i == 0 ? val[i] : Math.max(val[i] + matrix[i-1][j-weight[i-1]], matrix[i-1][j]);
+					matrix[i][j] = i == 0 ? val[i] : Math.max(val[i] + matrix[i-1][j-weight[i]], matrix[i-1][j]);
 			}
 		}
 		int i=matrix.length-1, j=matrix[0].length-1;
@@ -648,6 +650,7 @@ public class DynamicProgramming {
 	
 	public boolean subsetSum(int[] arr)
 	{
+		// find elements adds up to half of array sum
 		int len = arr.length;
 		int sum = 0;
 		for(int i =0; i < len ; i++)sum += arr[i];
@@ -655,27 +658,26 @@ public class DynamicProgramming {
 		sum /=2;
 		boolean[][] matrix =new boolean[len+1][sum+1];
 		for(int i = 0; i < matrix[0].length ; i++) matrix[0][i] = false;
-		for(int i =0; i < matrix.length ; i++) matrix[i][0] = true;
-		
+		for(int i = 0; i < matrix.length ; i++) matrix[i][0] = true;
 		
 		for(int i = 1; i < matrix.length ; i++)
 		{
 			for(int j = 1; j < matrix[0].length; j++)
 			{
 				matrix[i][j] = matrix[i-1][j];
-				if(arr[i-1] <= j)
+				if(arr[i-1] >= j)
 					matrix[i][j] = matrix[i][j] || matrix[i-1][j-arr[i-1]];
 			}
 		}
 		return matrix[matrix.length -1][matrix[0].length-1];
 	}
+	
 	public boolean subsetSum(int[] arr, int sum)
 	{
 		int len = arr.length;
 		boolean[][] matrix =new boolean[len+1][sum+1];
 		for(int i = 0; i < matrix[0].length ; i++) matrix[0][i] = false;
 		for(int i =0; i < matrix.length ; i++) matrix[i][0] = true;
-		
 		
 		for(int i = 1; i < matrix.length ; i++)
 		{
@@ -913,6 +915,7 @@ public class DynamicProgramming {
 		return sum;		
 	}
 	
+	//Largest Independent set in tree - set of nodes in tree having no direct edges.
 	class TreeNodeLIS extends TreeNode
 	{
 		public TreeNodeLIS() {
@@ -1049,6 +1052,7 @@ public class DynamicProgramming {
 		return mat[0][mat[0].length-1].first;
 	}
 	
+	//dictionay given, can a string be split so that each word is in dictionary
 	public boolean wordSplit(String s,List<String> dic)
 	{
 		boolean[][] mat = new boolean[s.length()][s.length()];
@@ -1078,6 +1082,7 @@ public class DynamicProgramming {
 		return mat[0][mat[0].length-1];
 	}
 	
+	// is s3 interleaving of s1 and s2?orders of characters preserved.
 	public boolean stringInterleaving(String s1, String s2, String s3)
 	{
 		char[] c1 = s1.toCharArray();
@@ -1148,7 +1153,7 @@ public class DynamicProgramming {
 		{
 			for(int j = 0; j< i ; j++)
 			{
-				if(jobs[j].start < jobs[i].end)continue;
+				if(jobs[i].start < jobs[j].end)continue;
 				maxprofit[i] = Math.max(maxprofit[j]+jobs[i].profit,maxprofit[i]);
 			}
 			max = Math.max(max, maxprofit[i]);

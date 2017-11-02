@@ -63,7 +63,6 @@ public class LLImplementation {
 		//regexPassword("WNeQN@1edred");
 		//l2brectangle(4);
 		//countShops();
-		printMaxInSlidingWindow(new int[]{12, 1, 78, 90, 57, 89, 56}, 3);
 	}
 	
 	public static void regexPassword(String s)
@@ -367,36 +366,4 @@ public class LLImplementation {
 		return shop;
 	}
 	
-	public static void printMaxInSlidingWindow(int[] arr, int k)
-	{
-		Deque<Integer> dq = new java.util.LinkedList();
-		int i = 0;
-		for(; i < k ; i++)
-		{
-			while( !dq.isEmpty() && arr[i] >= arr[dq.peekLast()])
-			{
-				dq.pollLast();
-			}
-			
-			dq.addLast(i);
-		}
-		for(; i < arr.length ; i++)
-		{
-			System.out.println(arr[dq.peekFirst()]);
-			//System.out.println(arr[dq.peekFirst()]);
-			while( !dq.isEmpty() && (i - k) >= dq.peekFirst())
-			{
-				dq.pollFirst();
-			}
-			while( !dq.isEmpty() && arr[i] >= arr[dq.peekLast()])
-			{
-				dq.pollLast();
-			}
-			dq.addLast(i);
-		}
-		System.out.println(arr[dq.peekFirst()]);
-		
-		
-	}
-
 }

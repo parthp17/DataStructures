@@ -26,6 +26,6 @@ public class LongestSubstring {
 	public static void main(String[] args) {
 		
 		LongestSubstring ls =new  LongestSubstring();
-		System.out.println(ls.lenghtOfLongestSubstring("au"));
+		System.out.println(ls.lenghtOfLongestSubstring("ausd"));
 	}
 }

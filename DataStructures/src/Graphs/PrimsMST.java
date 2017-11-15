@@ -6,10 +6,11 @@ import java.util.Map;
 
 public class PrimsMST {
 //O(Log(E+V)) O(ELogV)	
-//undirectedweightedgraph
+//undirected weighted graph
 //map
 //PrimsBMH
-
+// minimum spanning tree - n vertices and n-1 edges such that sum of wieght of edges is minimum.
+	
 	HashMap<VertexInt,Edge> resultMap;
 	PrimsBMH minHeap;
 	
@@ -30,7 +31,7 @@ public class PrimsMST {
 		
 		VertexInt startingVertex = uwg.vertices.iterator().next();
 		
-		minHeap.decrease(startingVertex, 0);
+		minHeap.decrease(startingVertex, 0);// decrease A
 		
 		while(!minHeap.isEmpty())
 		{

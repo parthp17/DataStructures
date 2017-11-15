@@ -283,7 +283,6 @@ public class BinaryTree {
 			return 0;
 		else
 			return (size(n.getLeft()) + 1 + size(n.getRight()));
-		
 	}
 	
 	public static boolean hasSum(TreeNode n, int sum)
@@ -882,6 +881,5 @@ public class BinaryTree {
 		if(sameTree(s, t))
 			return true;
 		return subTree(s.getLeft(), t) || subTree(s.getRight(),t);
-		
 	}
 }

@@ -152,7 +152,7 @@ public class BinarySearchTree extends BinaryTree{
 					else if(n.getValue() < root.getValue())
 					{
 						next = root;
-						root.getLeft();
+						root = root.getLeft();
 					}
 					else 
 						break;
@@ -170,7 +170,7 @@ public class BinarySearchTree extends BinaryTree{
 		{
 			if(root.getRight() != null)
 			{
-				TreeNode prev = null;
+				TreeNode prev = root.getRight();
 				while(root != null)
 				{
 					prev = root;

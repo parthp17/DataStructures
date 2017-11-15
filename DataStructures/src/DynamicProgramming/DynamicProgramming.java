@@ -212,6 +212,7 @@ public class DynamicProgramming {
 		return maxLength;
 	}
 	
+	//longest common subsequence
 	public String getLCS(char[] arr1, char[] arr2)
 	{
 		int[][] matrix = new int[arr2.length+1][arr1.length+1];
@@ -459,7 +460,7 @@ public class DynamicProgramming {
 					int q = 0;
 					for(int k = 1; k <= j ; k++)
 					{
-						q = 1+Math.max(map[i][j-k], map[i-1][k-1]);
+						q = 1+Math.max(map[i][j-k], map[i-1][k-1]);// map[i-1][k-1] -> egg breaks 
 						map[i][j] = Math.min(q, map[i][j]);
 					}
 				}
@@ -665,7 +666,7 @@ public class DynamicProgramming {
 			for(int j = 1; j < matrix[0].length; j++)
 			{
 				matrix[i][j] = matrix[i-1][j];
-				if(arr[i-1] >= j)
+				if(j >= arr[i-1])
 					matrix[i][j] = matrix[i][j] || matrix[i-1][j-arr[i-1]];
 			}
 		}

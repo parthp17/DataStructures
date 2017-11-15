@@ -20,8 +20,8 @@ public class BSTImplementation {
 		//BinarySearchTree.inOrderWithStack(BinarySearchTree.mergeBST(n, n));
 		//System.out.println(BinarySearchTree.hasOnlyOneChild(new int[]{10,2,3,4,5,6,7,8,9}));
 		//n = BinarySearchTree.constructPreorderBST(new int[]{10,8,6,9,12,13,14});
-		//BinaryTree.inOrderIterative(n);
-		//BinaryTree.inOrderIterative(BinarySearchTree.correctBST(n));
+		BinaryTree.inOrderIterative(n);
+		BinaryTree.inOrderIterative(BinarySearchTree.correctBST(n));
 
 		//System.out.println(BinarySearchTree.cielingBST(n, 0));
 		//System.out.println();
@@ -33,12 +33,12 @@ public class BSTImplementation {
 		
 		//BinarySearchTree.removeBSTkeysOutofRange(n, 2, 76);
 		//BinarySearchTree.inOrderIterative(n);
-		TreeNode n1 = new TreeNode(1);
-		TreeNode n2 = new TreeNode(2);
-		TreeNode n3 = new TreeNode(3);
-		n1.setRight(n2);
-		n2.setRight(n3);
-		BinarySearchTree.inOrderWithStack(BinarySearchTree.convertDLLtoBST(n1));
+//		TreeNode n1 = new TreeNode(1);
+//		TreeNode n2 = new TreeNode(2);
+//		TreeNode n3 = new TreeNode(3);
+//		n1.setRight(n2);
+//		n2.setRight(n3);
+//		BinarySearchTree.inOrderWithStack(BinarySearchTree.convertDLLtoBST(n1));
 		//System.out.println(BinarySearchTree.distanceBetweenNodesBST(new int[]{5,6,3,1,2,4}, 2, 4));
 	}
 }

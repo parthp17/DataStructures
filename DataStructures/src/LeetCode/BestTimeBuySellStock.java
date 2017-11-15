@@ -35,7 +35,7 @@ public class BestTimeBuySellStock {
 		int maxDiff;
 		for(int i  = 1; i < matrix.length ;i++)
 		{
-			maxDiff = matrix[i-1][0] - arr[0];
+			maxDiff = -arr[0];
 			for(int j  = 1 ; j < matrix[0].length ;j++)
 			{
 				maxDiff = maxDiff > matrix[i-1][j] -arr[j] ? maxDiff : matrix[i-1][j] -arr[j];

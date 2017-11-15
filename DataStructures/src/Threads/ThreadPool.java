@@ -28,7 +28,6 @@ public class ThreadPool {
 			pool[i] = new WorkerThread();
 			pool[i].start();
 		}
-			
 	}
 	
 	private class WorkerThread extends Thread

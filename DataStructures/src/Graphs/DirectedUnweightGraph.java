@@ -171,13 +171,19 @@ public class DirectedUnweightGraph {
 		Set<VertexInt> blackSet = new HashSet<VertexInt>();
 		for(VertexInt v: nodes)
 			whiteSet.add(v);
+		boolean flag = true;
 		while(whiteSet.size() > 0)
 		{
 			VertexInt current = whiteSet.iterator().next();
 			if(dfs(current, whiteSet, greySet, blackSet))
-				return true;
+				flag = true;
+			else
+			{
+				flag = false;
+				break;
+			}
 		}
-		return false;
+		return flag;
 	}
 	
 	private boolean dfs(VertexInt v, Set<VertexInt> white, Set<VertexInt> grey, Set<VertexInt> black)

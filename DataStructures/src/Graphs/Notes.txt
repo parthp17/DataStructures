@@ -74,7 +74,7 @@ Detect Cycle in Directed Graph
 
 Detect Cycle in UnDirected Graph
 
-2 ways) 
+2 ways)
 	Depth First Search
 		take a vertex and do DFS marking all the visiting node as visited.
 		while doing DFS pass along the immediate parent, and DFS except for immediate parent.
@@ -253,7 +253,7 @@ Dijkstra's Algorithm
 	decrease source to zero
 	while(MBh is not empty)
 		extract min and add it to distance map
-		explore all edges - check if distance for that vertex can be decreased
+		explore all edges - check if distance for that vertex can be decreased by comparing it to distance of current edge  + distance to current vertex
 			decrease the distance
 			update in distance map
 

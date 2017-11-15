@@ -24,9 +24,7 @@ public class MinimumWindowSubstring {
 	        if(map.get(c1) > 0)
 	            counter--;
 	        map.put(c1,map.get(c1)-1);
-	        
 	        end++;
-	        
 	        while(counter == 0)
 	        {
 	            if(minLen > end-start)
@@ -34,13 +32,10 @@ public class MinimumWindowSubstring {
 	                minLen = end-start;
 	                minStart = start;
 	            }
-	            
 	            char c2 = s.charAt(start);
 	            map.put(c2, map.get(c2)+1);
-	            
 	            if(map.get(c2) > 0)
 	                counter++;
-	            
 	            start++;
 	        }
 	    }

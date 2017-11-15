@@ -41,8 +41,9 @@ public class IslandArea {
 		
 		IslandArea ia = new IslandArea();
 		
-		ia.maxAreaOfIsland(new int[][]{
+		System.out.println(ia.maxAreaOfIsland(new int[][]{
 			{1,1,0,0,0},{1,1,0,0,0},{0,0,0,1,1},{0,0,0,1,1}
-		});
+		}));
+		;
 	}
 }

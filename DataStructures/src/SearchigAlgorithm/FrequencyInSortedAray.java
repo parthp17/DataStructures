@@ -27,7 +27,7 @@ public class FrequencyInSortedAray {
 			int mid = i + j >> 1;
 			if(arr[mid] == n)
 			{
-				if(arr[mid] != arr[mid+1])
+				if(mid+1 >= j || arr[mid] != arr[mid+1])
 				{
 					l=mid;
 					break;

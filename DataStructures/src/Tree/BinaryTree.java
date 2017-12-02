@@ -370,7 +370,6 @@ public class BinaryTree {
 		
 		if(x != null && y != null)
 			return root;//null
-		else if (x != null && y != null) return root;
 		else
 			return x == null ? y:x;
 	}
@@ -575,11 +574,8 @@ public class BinaryTree {
 	public static void inOrderIterative(TreeNode n)
 	{
 		if(n == null) return;
-		
 		TreeNode current, pre;
-		
 		current = n;
-		
 		while(current != null)
 		{
 			if(current.getLeft() == null)

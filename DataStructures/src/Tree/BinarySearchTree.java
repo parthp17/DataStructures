@@ -441,7 +441,7 @@ public class BinarySearchTree extends BinaryTree{
 	{
 		for(int i = 0;i < arr.length-1;i++)
 		{
-			if ((arr[i]-arr[i+1])*(arr[i] - arr[arr.length-1]) < 0) return false;
+			if((arr[i]-arr[i+1])*(arr[i] - arr[arr.length-1]) < 0) return false;
 		}
 		return true;
 	}
@@ -498,6 +498,11 @@ public class BinarySearchTree extends BinaryTree{
 	
 	public static void correctSwappedNodesBST(TreeNode n, TreeNode[] pointer)
 	{
+		//pointer[0] main faulty node
+		//pointer[1] first mismatch node
+		//pointer[2] 2nd mismatch node
+		//pointer[3] previous in-order node
+		
 		if( n !=  null)
 		{
 			correctSwappedNodesBST(n.getLeft(),pointer);
@@ -723,7 +728,7 @@ public class BinarySearchTree extends BinaryTree{
 		}
 		else if(smaller > root.getValue() && bigger > root.getValue())
 		{
-			return distance(root.getLeft(),smaller,bigger);
+			return distance(root.getRight(),smaller,bigger);
 		}
 		
 		return -1;
@@ -731,15 +736,17 @@ public class BinarySearchTree extends BinaryTree{
 	
 	private static int depth(TreeNode root, int node)
 	{
-	    if(root == null) return -1;
-	    if(root.getValue() == node) return 0;
+	    if(root == null) 
+	    	return -1;
+	    if(root.getValue() == node) 
+	    	return 0;
 	    int ans = 0;
 	    if(root.getValue() > node)
-	    ans = depth(root.getLeft(),node);
+	    	ans = depth(root.getLeft(),node);
 	    else if(root.getValue() < node)
-	    ans  = depth(root.getRight(),node);
+	    	ans  = depth(root.getRight(),node);
 	    if(ans != -1)
-	    ans++;
+	    	ans++;
 	    return ans;
 	}
 }

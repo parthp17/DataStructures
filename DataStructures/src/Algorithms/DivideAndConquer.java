@@ -1,5 +1,7 @@
 package Algorithms;
 
+import java.util.Arrays;
+
 public class DivideAndConquer {
 
 	public int medianofTwoEqualSortedArray(int[] arr1, int[] arr2)
@@ -63,5 +65,52 @@ public class DivideAndConquer {
 			}
 		}
 		return -1;
+	}
+	
+	public int medianKSortedArray(int[][]matrix)
+	{
+		int m = matrix.length;
+		int n = matrix.length;
+		
+		int max = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE;
+		
+		for(int i = 0; i < m ; i++)
+		{
+			min = min < matrix[i][0] ? min : matrix[i][0];
+			max = max > matrix[i][n-1] ? max : matrix[i][n-1];
+		}
+		
+		int median = (m*n + 1) / 2;
+		
+		while(min < max)
+		{
+			int mid = (min + max)/2;
+			int place = 0;
+			int get = 0;
+			for(int i = 0 ; i < m ; ++i)
+			{
+				get = Arrays.binarySearch(matrix[i], mid);
+				
+				if(get < 0)
+					get = Math.abs(get) - 1;
+				else
+					while(get < matrix[i].length && matrix[i][get] == mid) get += 1;
+				place +=get;				
+			}
+			if(place < median)
+				min = mid + 1;
+			else
+				max  = mid;
+		}
+		
+		return min;
+	}
+	
+	public static void main(String[] args) {
+		
+		DivideAndConquer dc = new DivideAndConquer();
+		int matrix[][]= { {1,3,5}, {2,6,9}, {3,6,9} };
+		System.out.println(dc.medianKSortedArray(matrix));
 	}
 }

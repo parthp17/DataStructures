@@ -48,7 +48,7 @@ public class TreeImplementations {
 		//System.out.println(BinaryTree.maxSumFromRootToLeaf(n1, in));
 		//System.out.println(in[0]);
 		
-		//System.out.println( BinaryTree.leastCommonAncestor(n1, n2, n12).getValue());
+		System.out.println( BinaryTree.leastCommonAncestor(n1, n2, n3).getValue());
 		
 		//System.out.println("Hieght " + objBinaryTree.getHeight(objBinaryTree.getRoot()));
 		
@@ -142,11 +142,11 @@ public class TreeImplementations {
 		
 		//System.out.println(BinaryTree.getLeafCount(n1));
 	//BinaryTree.printLevelOrderZigZag(n1);
-		TreeNode N1 = new TreeNode(3);
-		TreeNode N2 = new TreeNode(2);
-		TreeNode N3 = new TreeNode(1);
-		N1.setLeft(N2);
-		N1.setRight(N3);
+//		TreeNode N1 = new TreeNode(3);
+//		TreeNode N2 = new TreeNode(2);
+//		TreeNode N3 = new TreeNode(1);
+//		N1.setLeft(N2);
+//		N1.setRight(N3);
 		
 	/*	System.out.println(BinaryTree.parentEqualTosumOfChildrens(n1));
 */	

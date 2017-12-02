@@ -1,0 +1,14 @@
+Important questions
+
+merge K sorted arrays - Min heap/ priority queue
+find kth smallest element in sorted matrix - Min heap/ priority queue
+search in sorted matrix - start from matrix[0][noOfColumns-1]
+Median in row wise sorted matrix - calc min element, max element, median-index , (mid = (min+max)/2) 
+									Binary search in all rows and count for places of left of mid.
+									if(places < median) min = mid + 1;
+									else max = mid;
+						return min;
+
+Minimum number of swaps to sort array - copy and sort temp array of Pair(value, position, visited) compare pair visited & i
+Minimum number of adjacent swaps - merge sort with helper array inv_count += mid -i when not sorted;
+Count inversion - merge sort with helper array inv_count += mid -i when not sorted;

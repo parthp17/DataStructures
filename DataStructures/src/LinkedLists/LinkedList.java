@@ -195,7 +195,7 @@ public class LinkedList {
 		if(temp == null)
 		{
 			arr[0]--;
-			if(arr[0] == 0) return temp;
+			if(arr[0] == 0) return node;
 			else
 				return null;
 		}
@@ -520,7 +520,7 @@ public class LinkedList {
 			count--;
 		}
 		if(n != null)
-		n.setNext(current);
+			n.setNext(current);
 		for(;count<k;count++)
 		{
 			if(current!=null)

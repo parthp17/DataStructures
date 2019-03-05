@@ -1,5 +1,5 @@
 package LinkedLists;
-import java.util.HashMap;
+import java.util.*;
 
 public class LinkedList {
 
@@ -362,17 +362,17 @@ public class LinkedList {
 	{
 		LinkedListNode prev = null;
 		LinkedListNode current = this.head;
-		LinkedListNode next = current.getNext();
+		LinkedListNode next = null;
 		this.head = current.getNext();
 		while(current != null && current.getNext() != null)
 		{
+			next = current.getNext();
 			LinkedListNode temp = next.getNext();
 			next.setNext(current);
 			if(prev != null) prev.setNext(next);
 			current.setNext(temp);
 			prev = current;
 			current = temp;
-			next = temp.getNext();
 		}		
 	}
 	
@@ -475,6 +475,43 @@ public class LinkedList {
 			prevTail = prevCurrent;
 			prevCurrent = current;
 		}
+	}
+
+	public LinkedListNode reverseKGroup(LinkedListNode head, int k) {
+		if(head == null || k < 2) return head;
+
+		LinkedListNode current = head;
+		LinkedListNode prevTail = null;
+		LinkedListNode prevStart = head;
+		LinkedListNode runner = head;
+		while(runner != null){
+			int count = 0;
+			for(; runner != null && count < k ; runner = runner.getNext(), count++);
+			if (count == k){
+
+				LinkedListNode next = null;
+				LinkedListNode prev = null;
+				while(count > 0){
+					next = current.getNext();
+					current.setNext(prev);
+					prev = current;
+					current = next;
+					count--;
+				}
+				if(prevTail != null)
+					prevTail.setNext(prev);
+				else
+					head = prev;
+				prevTail = prevStart;
+				prevStart = current;
+			}
+			else {
+				if(prevTail != null)
+					prevTail.setNext(current);
+			}
+
+		}
+		return head;
 	}
 	
 	public LinkedListNode reverseKNodesInGroupRecursively(LinkedListNode node, int k)
@@ -616,35 +653,107 @@ public class LinkedList {
 		node1.setNext(null);
 		return this.head;
 	}
-	
-	public LinkedListNode reorderByK(int k)
+
+	public LinkedListNode reorderByK(int x)
 	{
+		if(head == null) return head;
+
+		LinkedListNode n = head;
 		LinkedListNode n1 = null;
 		LinkedListNode n2 = null;
-		LinkedListNode node = this.head;
-		while(node != null)
-		{
-			if(node.getData() < k)
+		LinkedListNode temp = null;
+		while( n != null ) {
+			if(n.getData() < x)
 			{
-				if(n1 == null)
-				{
-					this.head = node;
-					n1 = node;
+				if (n1 == null) {
+					n1 = n;
+					head = n;
 				}
-				else
-					n1.setNext(node);
+				else {
+					n1.setNext(n);
+					n1 = n1.getNext();
+				}
+			} else {
+				if (n2 == null) {
+					n2 = n;
+					temp = n;
+				}
+				else {
+					n2.setNext(n);
+					n2 = n2.getNext();
+				}
 			}
-			else
-			{
-				if(n2 == null)
-					n2 = node;
-				else
-					n2.setNext(node);
-			}
-			node = node.getNext();
+			n = n.getNext();
 		}
-		return this.head;
+		if(n1 != null) n1.setNext(temp);
+		if(n2 != null) n2.setNext(null);
+		return head;
 	}
-	
-	
+
+	public LinkedListNode reverseBetween(LinkedListNode head, int m, int n) {
+		if(m == n) return head;
+		LinkedListNode current = head;
+		LinkedListNode tail = null;
+		LinkedListNode next = null;
+		int p = 1;
+		LinkedListNode prev = null;
+		while(p < m) {
+			if(tail != null)
+				tail = tail.next;
+			else
+				tail = head;
+			prev = current;
+			current = current.next;
+			p++;
+		}
+		while( p <= n) {
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+			p++;
+		}
+		if(tail != null)
+			tail.next.next = current;
+		else
+			head.next = current;
+
+		if(tail != null)
+			tail.next = prev;
+		if (m == 1)
+			return prev;
+		else
+			return head;
+
+	}
+
+	public LinkedListNode addTwoNumbers(LinkedListNode l1, LinkedListNode l2) {
+		Stack<Integer> s1 = new Stack<Integer>();
+		Stack<Integer> s2 = new Stack<Integer>();
+
+		while(l1 != null) {
+			s1.push(l1.data);
+			l1 = l1.next;
+		};
+		while(l2 != null) {
+			s2.push(l2.data);
+			l2 = l2.next;
+		}
+
+		int sum = 0;
+		LinkedListNode list = new LinkedListNode(0);
+		while (!s1.empty() || !s2.empty()) {
+			if (!s1.empty()) sum += s1.pop();
+			if (!s2.empty()) sum += s2.pop();
+			list.data = sum % 10;
+			LinkedListNode head = new LinkedListNode(sum / 10);
+			head.next = list;
+			list = head;
+			sum /= 10;
+		}
+
+		return list.data == 0 ? list.next : list;
+	}
+
+
 }

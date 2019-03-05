@@ -290,4 +290,10 @@ DoublelyLinkedList
 	2nd with element greater than k
 	join both.
 	
-28) 
+28) Sort a linkedList
+    reach to middle
+    save middle.next and set middle.next = null;
+    sort head to middle and middle.next to end;
+    merge
+
+29)

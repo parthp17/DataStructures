@@ -1,5 +1,7 @@
 package Stack;
 
+import com.sun.tools.javac.util.Pair;
+
 import java.util.Arrays;
 import java.util.Stack;
 import java.util.function.IntConsumer;
@@ -62,7 +64,8 @@ public class StackUtility {
 		int p;
 		for(int i =0; i < arr.length; i++)
 		{
-			while(!stack.isEmpty() && arr[i] > arr[stack.peek()]) stack.pop();
+			while(!stack.isEmpty() && arr[i] >= arr[stack.peek()])
+				stack.pop();
 			p = stack.isEmpty() ? -1 : stack.peek();
 			span[i] = i - p;
 			stack.push(i);

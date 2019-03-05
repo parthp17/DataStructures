@@ -5,7 +5,25 @@ import java.util.regex.Pattern;
 public class RoughWork {
 
 	public static void main(String[] args) {
-		System.out.println(reverseWords("ssdsdsd"));
+		//System.out.println(reverseWords("ssdsdsd"));
+        int a = 2437;
+        int b = 875;
+        int x = a;
+        int y = b;
+
+        while(true)
+        {
+            if(x > y){
+                x = x-y;
+            }
+            else if (x < y){
+                y = y-x;
+            }
+            else break;
+        }
+
+        System.out.println(x + " " + y);
+
 	}
 	
 	public static boolean func(String args)
@@ -21,6 +39,10 @@ public class RoughWork {
 		return true;*/
 		
 		return Pattern.compile("([\\p{N}\\p{P}\\p{Z}\\p{L}\\p{M}*]+){1,100}").matcher("Nice work!".toString()).matches();
+
+
+
+
 	}
 	
 		static public String reverseWords(String s) {

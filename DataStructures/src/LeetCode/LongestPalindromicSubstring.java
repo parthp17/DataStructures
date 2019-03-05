@@ -20,6 +20,8 @@ public class LongestPalindromicSubstring {
 				else
 					sMax = s.substring( i - max/2 + 1, i + max/2 + 1);
 			}
+
+
 		}
 		System.out.println(max);
 		return sMax;

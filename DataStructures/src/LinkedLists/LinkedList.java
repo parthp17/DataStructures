@@ -51,6 +51,7 @@ public class LinkedList {
 		{
 			while(temp.getNext() != null)
 				temp = temp.getNext();
+			temp.next = node;
 		}
 		else
 		{
@@ -449,8 +450,8 @@ public class LinkedList {
 	public void reverseKNodesInGroup(int k)
 	{
 		LinkedListNode current = this.head;
-		LinkedListNode prevCurrent = current;
-		LinkedListNode prevTail = null;
+		LinkedListNode prevBatchHead = current;
+		LinkedListNode prevBatchTail = null;
 		while(current != null)
 		{
 			int count  = k;
@@ -464,16 +465,16 @@ public class LinkedList {
 				current = next;
 				count--;
 			}
-			if(prevTail != null)
+			if(prevBatchTail != null)
 			{
-				prevTail.setNext(tail);
+				prevBatchTail.setNext(tail);
 			}
 			else
 			{
 				this.head = tail;
 			}
-			prevTail = prevCurrent;
-			prevCurrent = current;
+			prevBatchTail = prevBatchHead;
+			prevBatchHead = current;
 		}
 	}
 

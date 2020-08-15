@@ -1,14 +1,6 @@
 package Tree;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class BinaryTree {
 
@@ -34,7 +26,61 @@ public class BinaryTree {
 		}
 		return;
 	}
-	
+
+	public void preOrderTraversalStack(TreeNode n) {
+
+		Stack<TreeNode> stack = new Stack<>();
+		stack.push(n);
+		while(!stack.isEmpty()) {
+
+			if(n != null) {
+				visitNode(n);
+				stack.push(n);
+				n = n.getLeft();
+			}
+			else {
+				n = stack.pop();
+				n = n.getRight();
+			}
+		}
+
+	}
+
+	public List<Integer> inorderTraversal(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		Deque<TreeNode> stack = new ArrayDeque<>();
+		TreeNode p = root;
+		while(!stack.isEmpty() || p != null) {
+			if(p != null) {
+				stack.push(p);
+				p = p.getLeft();
+			} else {
+				TreeNode node = stack.pop();
+				result.add(node.getValue());  // Add after all left children
+				p = node.getRight();
+			}
+		}
+		return result;
+	}
+
+	public List<Integer> postorderTraversal(TreeNode root) {
+		LinkedList<Integer> result = new LinkedList<>();
+		Deque<TreeNode> stack = new ArrayDeque<>();
+		TreeNode p = root;
+		while(!stack.isEmpty() || p != null) {
+			if(p != null) {
+				stack.push(p);
+				result.addFirst(p.getValue());  // Reverse the process of preorder
+				p = p.getRight();             // Reverse the process of preorder
+			} else {
+				TreeNode node = stack.pop();
+				p = node.getLeft();           // Reverse the process of preorder
+			}
+		}
+		return result;
+	}
+
+
 	public void preOrderTraversalIterative(TreeNode root)
 	{
 		if(root != null)
@@ -445,31 +491,26 @@ public class BinaryTree {
 			
 			s1.push(n);
 			Stack<TreeNode> s = s1;
-			Stack<TreeNode> stemp;
 			while(!s.isEmpty())
 			{
 				TreeNode n1 = s.pop();
 				if(s == s1) 
 				{
-					stemp = s2;
+
 					if(n1.getLeft() != null)
-					stemp.push(n1.getLeft());
+					s2.push(n1.getLeft());
 					if(n1.getRight() != null)
-					stemp.push(n1.getRight());
+					s2.push(n1.getRight());
 				}
 				else
 				{
-					stemp = s1;
 					if(n1.getRight() != null)
-					stemp.push(n1.getRight());
+					s1.push(n1.getRight());
 					if(n1.getLeft() != null)
-					stemp.push(n1.getLeft());
+					s1.push(n1.getLeft());
 				}
 				System.out.println(n1.getValue());
-				if(s.isEmpty())
-				{
-					s=stemp;
-				}
+				s = (s == s1) ? s2 : s1;
 			}
 		}
 		else
@@ -485,13 +526,8 @@ public class BinaryTree {
 		
 		if(parentEqualTosumOfChildrens(n.getLeft()) && parentEqualTosumOfChildrens(n.getRight()))
 		{
-			int left;
-			int right;
-			if(n.getLeft() == null) left = 0;
-			else left = n.getLeft().getValue();
-			if(n.getRight() == null) right = 0;
-			else right = n.getRight().getValue();
-			
+			int left = n.getLeft() == null ? 0 : n.getValue();
+			int right = n.getRight() == null ? 0 : n.getValue();
 			return n.getValue() == right+left;
 		}
 		return false;
@@ -504,21 +540,12 @@ public class BinaryTree {
 		TreeNode left = convertToChildSumTree(n.getLeft());
 		TreeNode right = convertToChildSumTree(n.getRight());
 		
-		int leftValue, rightValue, nodeValue  = n.getValue();
-		
-		if(left == null) leftValue = 0; 
-		else leftValue = left.getValue();
-		
-		if(right == null) rightValue = 0;
-		else rightValue = right.getValue();
-		
-		int diff = nodeValue - (leftValue + rightValue);
-		if(diff == 0 );
+		int leftValue = left == null ? 0 : left.getValue();
+		int rightValue = right == null ? 0 : right.getValue();
+		int diff = n.getValue() - (leftValue + rightValue);
+		if(diff == 0);
 		else if(diff < 0)
-		{
 			n.setValue(n.getValue() + Math.abs(diff));
-			
-		}
 		else
 		{
 			left.setValue(leftValue + Math.abs(diff));
@@ -817,7 +844,7 @@ public class BinaryTree {
 		
 		verticalSum(n.getLeft(),hm,hd-1);
 		
-		int prevSum = hm.get(hd) == null ? 0:hm.get(hd);
+		int prevSum = hm.getOrDefault(hd,0);
 		hm.put(hd, prevSum+n.getValue());
 		
 		verticalSum(n.getRight(),hm,hd+1);

@@ -130,7 +130,7 @@ public class BinarySearchTree extends BinaryTree{
 	public boolean isBST(TreeNode n)
 	{
 		if(n == null) return true;
-		if((n.getLeft() != null && n.getLeft().getValue() > n.getValue())||
+		if((n.getLeft() != null && n.getLeft().getValue() > n.getValue()) ||
 				(n.getRight() != null && n.getRight().getValue() <= n.getValue()))
 			return false;
 		return isBST(n.getLeft()) && isBST(n.getRight());
